@@ -9,7 +9,6 @@
 
 namespace DungeonDelver::System::IO
 {
-
 	int GetKey()
 	{
 #ifdef _WIN32
@@ -37,7 +36,7 @@ namespace DungeonDelver::System::IO
 #endif
 	}
 
-	bool DungeonDelver::System::IO::IsAlphaNumeric(const std::string& string)
+	bool IsAlphaNumeric(const std::string& string)
 	{
 		for (char c : string)
 		{
@@ -47,7 +46,7 @@ namespace DungeonDelver::System::IO
 		return true;
 	}
 
-	bool DungeonDelver::System::IO::IsNumeric(const std::string& string)
+	bool IsNumeric(const std::string& string)
 	{
 		if (string.length() == 0)
 			return false;
@@ -67,7 +66,7 @@ namespace DungeonDelver::System::IO
 		return true;
 	}
 
-	void DungeonDelver::System::IO::ClearConsole(std::ostream& output)
+	void ClearConsole(std::ostream& output)
 	{
 
 #ifdef _WIN32
@@ -84,17 +83,17 @@ namespace DungeonDelver::System::IO
 
 	}
 
-	void DungeonDelver::System::IO::WriteNewLines(std::ostream& output, int num)
+	void WriteNewLines(std::ostream& output, int num)
 	{
 		for (int i = 0; i < num; i++)
 			output << "\n";
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlert(std::ostream& output, const std::string& message, bool clearConsole)
+	void PressAnyKeyAlert(std::ostream& output, const std::string& message, bool clearConsole)
 	{
 		if (clearConsole)
 		{
-			DungeonDelver::System::IO::ClearConsole(output);
+			ClearConsole(output);
 		}
 
 		if (message != "")
@@ -102,40 +101,40 @@ namespace DungeonDelver::System::IO
 			output << message << std::endl;
 		}
 		output << "Press Any Key To Continue...";
-		DungeonDelver::System::IO::GetKey();
+		GetKey();
 		output << std::endl;
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlert(std::ostream& output, bool clearConsole)
+	void PressAnyKeyAlert(std::ostream& output, bool clearConsole)
 	{
 
 		if (clearConsole)
 		{
-			DungeonDelver::System::IO::ClearConsole(output);
+			ClearConsole(output);
 		}
 		output << "Press Any Key To Continue...";
-		DungeonDelver::System::IO::GetKey();
+		GetKey();
 		output << std::endl;
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlertInColor(std::ostream& output, const std::string& color, bool clearConsole)
+	void PressAnyKeyAlertInColor(std::ostream& output, const std::string& color, bool clearConsole)
 	{
 
 		if (clearConsole)
 		{
-			DungeonDelver::System::IO::ClearConsole(output);
+			ClearConsole(output);
 		}
 		output << color << "Press Any Key To Continue..." << ANSI_RESET;
-		DungeonDelver::System::IO::GetKey();
+		GetKey();
 		output << std::endl;
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlertInColor(std::ostream& output, const std::string& message, const std::string& color, bool clearConsole)
+	void PressAnyKeyAlertInColor(std::ostream& output, const std::string& message, const std::string& color, bool clearConsole)
 	{
 
 		if (clearConsole)
 		{
-			DungeonDelver::System::IO::ClearConsole(output);
+			ClearConsole(output);
 		}
 
 		output << color;
@@ -144,21 +143,21 @@ namespace DungeonDelver::System::IO
 			output << message << "\n";
 		}
 		output << "Press Any Key To Continue..." << ANSI_RESET;
-		DungeonDelver::System::IO::GetKey();
+		GetKey();
 		output << std::endl;
 	}
 
-	bool DungeonDelver::System::IO::AskYesNo(std::ostream& output, const std::string& question, bool clearScreen)
+	bool AskYesNo(std::ostream& output, const std::string& question, bool clearScreen)
 	{
 		bool validInput = false;
 		do
 		{
 			if (clearScreen)
-				DungeonDelver::System::IO::ClearConsole(output);
+				ClearConsole(output);
 
 			output << question << "\n" << "Input (y/n): ";
 
-			char input = DungeonDelver::System::IO::GetKey();
+			char input = GetKey();
 
 
 			if (std::isalpha(input))
@@ -173,23 +172,23 @@ namespace DungeonDelver::System::IO
 					return false;
 				}
 			}
-			DungeonDelver::System::IO::FlushInputBuffer(std::cin);
-			DungeonDelver::System::IO::WriteNewLines(output);
-			DungeonDelver::System::IO::PressAnyKeyAlertInColor(output, "Invalid!", ANSI_RED, false);
+			FlushInputBuffer(std::cin);
+			WriteNewLines(output);
+			PressAnyKeyAlertInColor(output, "Invalid!", ANSI_RED, false);
 
 		} while (!validInput);
 	}
 
-	bool DungeonDelver::System::IO::AskYesNo(std::ostream& output, const std::string& question, const std::string& color, bool clearScreen)
+	bool AskYesNo(std::ostream& output, const std::string& question, const std::string& color, bool clearScreen)
 	{
 		bool validInput = false;
 		do
 		{
 			if (clearScreen)
-				DungeonDelver::System::IO::ClearConsole(output);
+				ClearConsole(output);
 
 			output << color << question << "\n" << "Input (y/n): " << ANSI_RESET;
-			char input = DungeonDelver::System::IO::GetKey();
+			char input = GetKey();
 
 			if (std::isalpha(input))
 			{
@@ -203,14 +202,14 @@ namespace DungeonDelver::System::IO
 					return false;
 				}
 			}
-			DungeonDelver::System::IO::FlushInputBuffer(std::cin);
-			DungeonDelver::System::IO::WriteNewLines(output);
-			DungeonDelver::System::IO::PressAnyKeyAlertInColor(output, "Invalid!", ANSI_RED, false);
+			FlushInputBuffer(std::cin);
+			WriteNewLines(output);
+			PressAnyKeyAlertInColor(output, "Invalid!", ANSI_RED, false);
 
 		} while (!validInput);
 	}
 
-	int DungeonDelver::System::IO::GetIntFromUser(std::istream& in, std::ostream& output, int min, int max, bool clearConsole, bool inColor, const std::string& color)
+	int GetIntFromUser(std::istream& in, std::ostream& output, int min, int max, bool clearConsole, bool inColor, const std::string& color)
 	{
 		int number = 0;
 		bool valid = false;
@@ -218,7 +217,7 @@ namespace DungeonDelver::System::IO
 		do
 		{
 			if (clearConsole)
-				DungeonDelver::System::IO::ClearConsole(output);
+				ClearConsole(output);
 			if (inColor)
 				output << color;
 
@@ -226,9 +225,9 @@ namespace DungeonDelver::System::IO
 			output << "Please enter a number between " << min << " and " << max << " inclusively: ";
 			std::string input = "";
 			std::getline(in, input);
-			DungeonDelver::System::IO::FlushInputBuffer(in);
+			FlushInputBuffer(in);
 
-			if (DungeonDelver::System::IO::IsNumeric(input))
+			if (IsNumeric(input))
 			{
 				number = std::stoi(input);
 
@@ -246,7 +245,7 @@ namespace DungeonDelver::System::IO
 		return number;
 	}
 
-	void DungeonDelver::System::IO::WriteHeading(std::ostream& output, const std::string& heading, int minimumLength, int minimumPadding, bool clearConsole, bool inColor, const std::string& color)
+	void WriteHeading(std::ostream& output, const std::string& heading, int minimumLength, int minimumPadding, bool clearConsole, bool inColor, const std::string& color)
 	{
 		if (clearConsole)
 			ClearConsole(output);
@@ -254,7 +253,7 @@ namespace DungeonDelver::System::IO
 		int headingWidth = static_cast<int>(heading.length());
 
 		int width = std::max(headingWidth + (2 * minimumPadding), minimumLength);
-		std::string line(width, '-');	
+		std::string line(width, '-');
 
 		int padding = (width - headingWidth) / 2;             //Padding amount for the left       
 
@@ -263,13 +262,13 @@ namespace DungeonDelver::System::IO
 		Write(output, line, true, inColor, color);
 	}
 
-	void DungeonDelver::System::IO::FlushInputBuffer(std::istream& input)
+	void FlushInputBuffer(std::istream& input)
 	{
 		input.clear();
 		input.ignore(input.rdbuf()->in_avail());
 	}
 
-	int DungeonDelver::System::IO::GetIndexOfUserChoice(std::ostream& output, const std::vector<std::string>& options, bool askInColor, const std::string& color)
+	int GetIndexOfUserChoice(std::ostream& output, const std::vector<std::string>& options, bool askInColor, const std::string& color)
 	{
 		if (options.empty())
 			return -1;
@@ -282,19 +281,22 @@ namespace DungeonDelver::System::IO
 
 		return index;
 	}
+
+	void Write(std::ostream& output, const std::string& message, bool newLine, bool inColor, const std::string& color)
+	{
+		if (inColor)
+		{
+			output << color << message << ANSI_RESET;
+		}
+		else
+		{
+			output << message;
+		}
+
+		if (newLine)
+			output << "\n";
+	}
 }
 
-void DungeonDelver::System::IO::Write(std::ostream& output, const std::string& message,bool newLine, bool inColor, const std::string& color)
-{
-	if (inColor)
-	{
-		output << color << message << ANSI_RESET;
-	}
-	else
-	{
-		output << message;
-	}
+	
 
-	if (newLine)
-		output << "\n";
-}
