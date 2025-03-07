@@ -254,14 +254,14 @@ namespace DungeonDelver::System::IO
 		return number;
 	}
 
-	void DungeonDelver::System::IO::WriteHeading(std::ostream& output, const std::string& heading, bool clearConsole, bool inColor, const std::string& color)
+	void DungeonDelver::System::IO::WriteHeading(std::ostream& output, const std::string& heading, int minimumLength, int minimumPadding, bool clearConsole, bool inColor, const std::string& color)
 	{
 		if (clearConsole)
 			ClearConsole(output);
 
 		int headingWidth = static_cast<int>(heading.length());
 
-		int width = std::max(headingWidth + 10, 70);
+		int width = std::max(headingWidth + (2 * minimumPadding), minimumLength);
 		std::string line(width, '-');	
 
 		int leftPadding = (width - headingWidth) / 2;             //Padding amount for the left       

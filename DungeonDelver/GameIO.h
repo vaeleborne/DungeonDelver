@@ -127,7 +127,21 @@ namespace DungeonDelver::System::IO
 	/// <returns>An integer between min and max either inclusively</returns>
 	int GetIntFromUser(std::istream& in, std::ostream& output, int min, int max, bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
 
-	void WriteHeading(std::ostream& output, const std::string& heading, bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
+	/// <summary>
+	/// Writes a centered heading based on a minimum length and a minimum padding value
+	/// EXAMPLE: to center 'word' if minimum length is 40 padding on each side would be 
+	/// the 40 - the length of 'word' divided by two. But if minimum length is say 2 and minimum padding is 5
+	/// the padding on each side will be 5
+	/// </summary>
+	/// <param name="mimimumLength">The minimum length of the heading</param>
+	/// <param name="minimumPadding">The minimum amount of padding we will have</param>
+	/// <param name="output">The output stream</param>
+	/// <param name="heading">The heading to write</param>
+	/// <param name="clearConsole">If we want to clear the console/stream</param>
+	/// <param name="inColor">If we want to write in color</param>
+	/// <param name="color">The color to write in if applicable</param>
+	void WriteHeading(std::ostream& output, const std::string& heading, int minimumLength = 60, int minimumPadding = 5, 
+		bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
 }
 
 #endif
