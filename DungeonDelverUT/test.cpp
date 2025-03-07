@@ -4,7 +4,7 @@
 
 static TEST(OUTPUT, WRITEINCOLOR_NO_FATAL_ERROR) {
 	EXPECT_NO_FATAL_FAILURE({
-		DungeonDelver::System::IO::WriteInColor("Hello Unit Tests!", ANSI_BLUE, true);
+		DungeonDelver::System::IO::WriteInColor(std::cout, "Hello Unit Tests!", ANSI_BLUE, true);
 	});
 }
 

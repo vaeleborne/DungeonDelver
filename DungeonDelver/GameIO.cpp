@@ -67,7 +67,7 @@ namespace DungeonDelver::System::IO
 		return true;
 	}
 
-	void DungeonDelver::System::IO::WriteInColor(const std::string& message, const std::string& color, bool addNewLine, std::ostream& output)
+	void DungeonDelver::System::IO::WriteInColor(std::ostream& output, const std::string& message, const std::string& color, bool addNewLine)
 	{
 		output << color << message << ANSI_RESET;
 
@@ -92,13 +92,13 @@ namespace DungeonDelver::System::IO
 
 	}
 
-	void DungeonDelver::System::IO::WriteNewLines(int num, std::ostream& output)
+	void DungeonDelver::System::IO::WriteNewLines(std::ostream& output, int num)
 	{
 		for (int i = 0; i < num; i++)
 			output << "\n";
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlert(const std::string& message, bool clearConsole, std::ostream& output)
+	void DungeonDelver::System::IO::PressAnyKeyAlert(std::ostream& output, const std::string& message, bool clearConsole)
 	{
 		if (clearConsole)
 		{
@@ -114,7 +114,7 @@ namespace DungeonDelver::System::IO
 		output << std::endl;
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlert(bool clearConsole, std::ostream& output)
+	void DungeonDelver::System::IO::PressAnyKeyAlert(std::ostream& output, bool clearConsole)
 	{
 
 		if (clearConsole)
@@ -126,7 +126,7 @@ namespace DungeonDelver::System::IO
 		output << std::endl;
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlertInColor(const std::string& color, bool clearConsole, std::ostream& output)
+	void DungeonDelver::System::IO::PressAnyKeyAlertInColor(std::ostream& output, const std::string& color, bool clearConsole)
 	{
 
 		if (clearConsole)
@@ -138,7 +138,7 @@ namespace DungeonDelver::System::IO
 		output << std::endl;
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlertInColor(const std::string& message, const std::string& color, bool clearConsole, std::ostream& output)
+	void DungeonDelver::System::IO::PressAnyKeyAlertInColor(std::ostream& output, const std::string& message, const std::string& color, bool clearConsole)
 	{
 
 		if (clearConsole)
@@ -156,7 +156,7 @@ namespace DungeonDelver::System::IO
 		output << std::endl;
 	}
 
-	bool DungeonDelver::System::IO::AskYesNo(const std::string& question, bool clearScreen, std::ostream& output)
+	bool DungeonDelver::System::IO::AskYesNo(std::ostream& output, const std::string& question, bool clearScreen)
 	{
 		bool validInput = false;
 		do
@@ -182,13 +182,13 @@ namespace DungeonDelver::System::IO
 				}
 			}
 			DungeonDelver::System::IO::FlushInputBuffer(std::cin);
-			DungeonDelver::System::IO::WriteNewLines(1, output);
-			DungeonDelver::System::IO::PressAnyKeyAlertInColor("Invalid!", ANSI_RED, false, output);
+			DungeonDelver::System::IO::WriteNewLines(output);
+			DungeonDelver::System::IO::PressAnyKeyAlertInColor(output, "Invalid!", ANSI_RED, false);
 
 		} while (!validInput);
 	}
 
-	bool DungeonDelver::System::IO::AskYesNo(const std::string& question, const std::string& color, bool clearScreen, std::ostream& output)
+	bool DungeonDelver::System::IO::AskYesNo(std::ostream& output, const std::string& question, const std::string& color, bool clearScreen)
 	{
 		bool validInput = false;
 		do
@@ -212,8 +212,8 @@ namespace DungeonDelver::System::IO
 				}
 			}
 			DungeonDelver::System::IO::FlushInputBuffer(std::cin);
-			DungeonDelver::System::IO::WriteNewLines(1, output);
-			DungeonDelver::System::IO::PressAnyKeyAlertInColor("Invalid!", ANSI_RED, false, output);
+			DungeonDelver::System::IO::WriteNewLines(output);
+			DungeonDelver::System::IO::PressAnyKeyAlertInColor(output, "Invalid!", ANSI_RED, false);
 
 		} while (!validInput);
 	}
@@ -269,9 +269,9 @@ namespace DungeonDelver::System::IO
 
 		if (inColor)
 		{
-			WriteInColor(line, color, true, output);
-			WriteInColor(std::string(leftPadding, ' ') + heading + std::string(rightPadding, ' '), color, true, output);
-			WriteInColor(line, color, true, output);
+			WriteInColor(output, line, color, true);
+			WriteInColor(output, std::string(leftPadding, ' ') + heading + std::string(rightPadding, ' '), color, true);
+			WriteInColor(output, line, color, true);
 		}
 		else
 		{
