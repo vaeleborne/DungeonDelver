@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 #include "ANSI_Colors.h"
 #include "GameMath.h"
 
@@ -27,21 +28,6 @@ namespace DungeonDelver::System::IO
 	/// <param name="string">String to test</param>
 	/// <returns>True if the string is numeric (including a negative), false otherwise</returns>
 	bool IsNumeric(const std::string& string);
-
-	/// <summary>
-	/// Writes a message to the console in a given color, default of white <br/> 
-	/// Optionally, can print the new line character at the end of the message
-	/// </summary>
-	/// <param name="message">
-	/// The message to display
-	/// </param>
-	/// <param name="color">
-	/// The color (use ANSI_Colors.h)
-	/// </param>
-	/// <param name="addNewLine">
-	/// If we want to print a new line
-	/// </param>
-	void WriteInColor(std::ostream& output, const std::string& message, const std::string& color = ANSI_WHITE, bool addNewLine = false);
 
 	/// <summary>
 	/// Cross platform way to clear the console
@@ -142,6 +128,21 @@ namespace DungeonDelver::System::IO
 	/// <param name="color">The color to write in if applicable</param>
 	void WriteHeading(std::ostream& output, const std::string& heading, int minimumLength = 60, int minimumPadding = 5, 
 		bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
+
+	int GetIndexOfUserChoice(std::ostream& output, const std::vector<std::string>& options, bool askInColor = false, const std::string& color = ANSI_WHITE);
+
+	/// <summary>
+	/// Writes a message to an output stream, optionally writes it in a color with a default of white <br/> 
+	/// If inColor is true but no color is given. Uses an ANSI escape sequence to color the text, this won't work<br/> 
+	/// On older windows systems or out streams that can't handle them. 
+	/// Optionally, can print the new line character at the end of the message
+	/// </summary>
+	/// <param name="output">The output stream</param>
+	/// <param name="message">The message to write</param>
+	/// <param name="newLine">Determines if we add a newline at the end</param>
+	/// <param name="inColor">Determines if we write in a specific color</param>
+	/// <param name="color">The color to write the text in</param>
+	void Write(std::ostream& output, const std::string& message, bool newLine = false, bool inColor = false, const std::string& color = ANSI_WHITE);
 }
 
 #endif

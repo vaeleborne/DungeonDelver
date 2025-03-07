@@ -67,14 +67,6 @@ namespace DungeonDelver::System::IO
 		return true;
 	}
 
-	void DungeonDelver::System::IO::WriteInColor(std::ostream& output, const std::string& message, const std::string& color, bool addNewLine)
-	{
-		output << color << message << ANSI_RESET;
-
-		if (addNewLine)
-			output << "\n";
-	}
-
 	void DungeonDelver::System::IO::ClearConsole(std::ostream& output)
 	{
 
@@ -264,25 +256,45 @@ namespace DungeonDelver::System::IO
 		int width = std::max(headingWidth + (2 * minimumPadding), minimumLength);
 		std::string line(width, '-');	
 
-		int leftPadding = (width - headingWidth) / 2;             //Padding amount for the left       
-		int rightPadding = width - leftPadding - headingWidth;    //Padding amount for the right
+		int padding = (width - headingWidth) / 2;             //Padding amount for the left       
 
-		if (inColor)
-		{
-			WriteInColor(output, line, color, true);
-			WriteInColor(output, std::string(leftPadding, ' ') + heading + std::string(rightPadding, ' '), color, true);
-			WriteInColor(output, line, color, true);
-		}
-		else
-		{
-			output << line << "\n" << std::string(leftPadding, ' ') + heading + std::string(rightPadding, ' ') << "\n" << line << "\n";
-		}
+		Write(output, line, true, inColor, color);
+		Write(output, std::string(padding, ' ') + heading + std::string(padding, ' '), true, inColor, color);
+		Write(output, line, true, inColor, color);
 	}
 
-
-	void FlushInputBuffer(std::istream& input)
+	void DungeonDelver::System::IO::FlushInputBuffer(std::istream& input)
 	{
 		input.clear();
 		input.ignore(input.rdbuf()->in_avail());
 	}
+
+	int DungeonDelver::System::IO::GetIndexOfUserChoice(std::ostream& output, const std::vector<std::string>& options, bool askInColor, const std::string& color)
+	{
+		if (options.empty())
+			return -1;
+
+		int index = 0;
+		for (int i = 0; i < options.size(); i++)
+		{
+			Write(output, options[i], true, askInColor, color);
+		}
+
+		return index;
+	}
+}
+
+void DungeonDelver::System::IO::Write(std::ostream& output, const std::string& message,bool newLine, bool inColor, const std::string& color)
+{
+	if (inColor)
+	{
+		output << color << message << ANSI_RESET;
+	}
+	else
+	{
+		output << message;
+	}
+
+	if (newLine)
+		output << "\n";
 }

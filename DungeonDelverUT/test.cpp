@@ -5,7 +5,7 @@
 
 static TEST(OutputTests, WriteInColor_ExpectNoFatalError) {
 	EXPECT_NO_FATAL_FAILURE({
-		DungeonDelver::System::IO::WriteInColor(std::cout, "Hello Unit Tests!", ANSI_BLUE, true);
+		DungeonDelver::System::IO::Write(std::cout, "Hello Unit Tests!", true, true, ANSI_BLUE);
 	});
 }
 
@@ -25,7 +25,7 @@ static TEST(OutputTests, WriteInColorMessage_ColorCodesAppear_NoNewLine)
 
 	expected << color << message << ANSI_RESET;
 
-	DungeonDelver::System::IO::WriteInColor(actual, message, color);
+	DungeonDelver::System::IO::Write(actual, message, false, true, color);
 
 	EXPECT_EQ(expected.str(), actual.str());
 }
@@ -40,7 +40,25 @@ static TEST(OutputTests, WriteInColorMessage_ColorCodesAppear_WithNewLine)
 
 	expected << color << message << ANSI_RESET << "\n";
 
-	DungeonDelver::System::IO::WriteInColor(actual, message, color, true);
+	DungeonDelver::System::IO::Write(actual, message, true, true, color);
 
 	EXPECT_EQ(expected.str(), actual.str());
+}
+
+static TEST(InputTests, GetIntFromUser_ReturnsExpectedValues)
+{
+	std::istringstream mockInput("10\n");
+	std::stringstream mockOutput;
+
+	int expectedInt = 10;
+
+	int actualInt = DungeonDelver::System::IO::GetIntFromUser(mockInput, mockOutput, -10, 10);
+
+	EXPECT_EQ(expectedInt, actualInt);
+
+	expectedInt = -10;
+	mockInput.clear();
+	mockInput.str("-10\n");
+	actualInt = DungeonDelver::System::IO::GetIntFromUser(mockInput, mockOutput, -10, 10);
+	EXPECT_EQ(expectedInt, actualInt);
 }
