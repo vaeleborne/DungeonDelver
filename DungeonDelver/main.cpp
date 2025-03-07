@@ -7,15 +7,6 @@ int main()
 {
     // Print "Hello World" in red
     io::WriteInColor("Hello World!", ANSI_RED, true);
-
-    if (io::AskYesNo("Please enter y", ANSI_YELLOW, false))
-    {
-        std::cout << "\nThank you!";
-    }
-    else
-    {
-        std::cout << "\nHey!";
-    }
-
-	return 0;
+    
+    return 0;
 }
