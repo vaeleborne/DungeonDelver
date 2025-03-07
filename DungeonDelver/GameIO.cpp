@@ -67,105 +67,104 @@ namespace DungeonDelver::System::IO
 		return true;
 	}
 
-	void DungeonDelver::System::IO::WriteInColor(const std::string& message, const std::string& color, bool addNewLine)
+	void DungeonDelver::System::IO::WriteInColor(const std::string& message, const std::string& color, bool addNewLine, std::ostream& output)
 	{
-		std::cout << color << message << ANSI_RESET;
+		output << color << message << ANSI_RESET;
 
 		if (addNewLine)
-			std::cout << "\n";
+			output << "\n";
 	}
 
-	void DungeonDelver::System::IO::ClearConsole()
+	void DungeonDelver::System::IO::ClearConsole(std::ostream& output)
 	{
-		//std::cout << "\x1b[2J\x1b[H";
 
 #ifdef _WIN32
-		system("cls");
+		if (&output != &std::cout || system("cls") != 0)
+		{
+			output << "\x1b[2J\x1b[H";	//If clear fails, use ansi to 'clear' (scrolls down)
+		}
 #else
-		system("clear");
+		if (&output != &std::cout || system("clear") != 0)
+		{
+			output << "\x1b[2J\x1b[H";	//If clear fails, use ansi to 'clear' (scrolls down)
+		}
 #endif // _WIN32
 
 	}
 
-	void DungeonDelver::System::IO::FlushCinBuffer()
-	{
-		std::cin.clear();
-		std::cin.ignore(std::cin.rdbuf()->in_avail());
-	}
-
-	void DungeonDelver::System::IO::WriteNewLines(int num)
+	void DungeonDelver::System::IO::WriteNewLines(int num, std::ostream& output)
 	{
 		for (int i = 0; i < num; i++)
-			std::cout << "\n";
+			output << "\n";
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlert(const std::string& message, bool clearConsole)
+	void DungeonDelver::System::IO::PressAnyKeyAlert(const std::string& message, bool clearConsole, std::ostream& output)
 	{
 		if (clearConsole)
 		{
-			DungeonDelver::System::IO::ClearConsole();
+			DungeonDelver::System::IO::ClearConsole(output);
 		}
 
 		if (message != "")
 		{
-			std::cout << message << std::endl;
+			output << message << std::endl;
 		}
-		std::cout << "Press Any Key To Continue...";
+		output << "Press Any Key To Continue...";
 		DungeonDelver::System::IO::GetKey();
-		std::cout << std::endl;
+		output << std::endl;
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlert(bool clearConsole)
+	void DungeonDelver::System::IO::PressAnyKeyAlert(bool clearConsole, std::ostream& output)
 	{
 
 		if (clearConsole)
 		{
-			DungeonDelver::System::IO::ClearConsole();
+			DungeonDelver::System::IO::ClearConsole(output);
 		}
-		std::cout << "Press Any Key To Continue...";
+		output << "Press Any Key To Continue...";
 		DungeonDelver::System::IO::GetKey();
-		std::cout << std::endl;
+		output << std::endl;
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlertInColor(const std::string& color, bool clearConsole)
+	void DungeonDelver::System::IO::PressAnyKeyAlertInColor(const std::string& color, bool clearConsole, std::ostream& output)
 	{
 
 		if (clearConsole)
 		{
-			DungeonDelver::System::IO::ClearConsole();
+			DungeonDelver::System::IO::ClearConsole(output);
 		}
-		std::cout << color << "Press Any Key To Continue..." << ANSI_RESET;
+		output << color << "Press Any Key To Continue..." << ANSI_RESET;
 		DungeonDelver::System::IO::GetKey();
-		std::cout << std::endl;
+		output << std::endl;
 	}
 
-	void DungeonDelver::System::IO::PressAnyKeyAlertInColor(const std::string& message, const std::string& color, bool clearConsole)
+	void DungeonDelver::System::IO::PressAnyKeyAlertInColor(const std::string& message, const std::string& color, bool clearConsole, std::ostream& output)
 	{
 
 		if (clearConsole)
 		{
-			DungeonDelver::System::IO::ClearConsole();
+			DungeonDelver::System::IO::ClearConsole(output);
 		}
 
-		std::cout << color;
+		output << color;
 		if (message != "")
 		{
-			std::cout << message << "\n";
+			output << message << "\n";
 		}
-		std::cout << "Press Any Key To Continue..." << ANSI_RESET;
+		output << "Press Any Key To Continue..." << ANSI_RESET;
 		DungeonDelver::System::IO::GetKey();
-		std::cout << std::endl;
+		output << std::endl;
 	}
 
-	bool DungeonDelver::System::IO::AskYesNo(const std::string& question, bool clearScreen)
+	bool DungeonDelver::System::IO::AskYesNo(const std::string& question, bool clearScreen, std::ostream& output)
 	{
 		bool validInput = false;
 		do
 		{
 			if (clearScreen)
-				DungeonDelver::System::IO::ClearConsole();
+				DungeonDelver::System::IO::ClearConsole(output);
 
-			std::cout << question << "\n" << "Input (y/n): ";
+			output << question << "\n" << "Input (y/n): ";
 
 			char input = DungeonDelver::System::IO::GetKey();
 
@@ -182,22 +181,22 @@ namespace DungeonDelver::System::IO
 					return false;
 				}
 			}
-			DungeonDelver::System::IO::FlushCinBuffer();
-			DungeonDelver::System::IO::WriteNewLines();
-			DungeonDelver::System::IO::PressAnyKeyAlertInColor("Invalid!", ANSI_RED, false);
+			DungeonDelver::System::IO::FlushInputBuffer(std::cin);
+			DungeonDelver::System::IO::WriteNewLines(1, output);
+			DungeonDelver::System::IO::PressAnyKeyAlertInColor("Invalid!", ANSI_RED, false, output);
 
 		} while (!validInput);
 	}
 
-	bool DungeonDelver::System::IO::AskYesNo(const std::string& question, const std::string& color, bool clearScreen)
+	bool DungeonDelver::System::IO::AskYesNo(const std::string& question, const std::string& color, bool clearScreen, std::ostream& output)
 	{
 		bool validInput = false;
 		do
 		{
 			if (clearScreen)
-				DungeonDelver::System::IO::ClearConsole();
+				DungeonDelver::System::IO::ClearConsole(output);
 
-			std::cout << color << question << "\n" << "Input (y/n): " << ANSI_RESET;
+			output << color << question << "\n" << "Input (y/n): " << ANSI_RESET;
 			char input = DungeonDelver::System::IO::GetKey();
 
 			if (std::isalpha(input))
@@ -212,14 +211,14 @@ namespace DungeonDelver::System::IO
 					return false;
 				}
 			}
-			DungeonDelver::System::IO::FlushCinBuffer();
-			DungeonDelver::System::IO::WriteNewLines();
-			DungeonDelver::System::IO::PressAnyKeyAlertInColor("Invalid!", ANSI_RED, false);
+			DungeonDelver::System::IO::FlushInputBuffer(std::cin);
+			DungeonDelver::System::IO::WriteNewLines(1, output);
+			DungeonDelver::System::IO::PressAnyKeyAlertInColor("Invalid!", ANSI_RED, false, output);
 
 		} while (!validInput);
 	}
 
-	int DungeonDelver::System::IO::GetIntFromUser(int min, int max, bool clearConsole, bool inColor, const std::string& color)
+	int DungeonDelver::System::IO::GetIntFromUser(std::istream& in, std::ostream& output, int min, int max, bool clearConsole, bool inColor, const std::string& color)
 	{
 		int number = 0;
 		bool valid = false;
@@ -227,15 +226,15 @@ namespace DungeonDelver::System::IO
 		do
 		{
 			if (clearConsole)
-				DungeonDelver::System::IO::ClearConsole();
+				DungeonDelver::System::IO::ClearConsole(output);
 			if (inColor)
-				std::cout << color;
+				output << color;
 
 
-			std::cout << "Please enter a number between " << min << " and " << max << " inclusively: ";
+			output << "Please enter a number between " << min << " and " << max << " inclusively: ";
 			std::string input = "";
-			std::getline(std::cin, input);
-			DungeonDelver::System::IO::FlushCinBuffer();
+			std::getline(in, input);
+			DungeonDelver::System::IO::FlushInputBuffer(in);
 
 			if (DungeonDelver::System::IO::IsNumeric(input))
 			{
@@ -248,10 +247,42 @@ namespace DungeonDelver::System::IO
 			}
 
 			if (inColor)
-				std::cout << ANSI_RESET;
+				output << ANSI_RESET;
 
 		} while (!valid);
 
 		return number;
+	}
+
+	void DungeonDelver::System::IO::WriteHeading(std::ostream& output, const std::string& heading, bool clearConsole, bool inColor, const std::string& color)
+	{
+		if (clearConsole)
+			ClearConsole(output);
+
+		int headingWidth = static_cast<int>(heading.length());
+
+		int width = std::max(headingWidth + 10, 70);
+		std::string line(width, '-');	
+
+		int leftPadding = (width - headingWidth) / 2;             //Padding amount for the left       
+		int rightPadding = width - leftPadding - headingWidth;    //Padding amount for the right
+
+		if (inColor)
+		{
+			WriteInColor(line, color, true, output);
+			WriteInColor(std::string(leftPadding, ' ') + heading + std::string(rightPadding, ' '), color, true, output);
+			WriteInColor(line, color, true, output);
+		}
+		else
+		{
+			output << line << "\n" << std::string(leftPadding, ' ') + heading + std::string(rightPadding, ' ') << "\n" << line << "\n";
+		}
+	}
+
+
+	void FlushInputBuffer(std::istream& input)
+	{
+		input.clear();
+		input.ignore(input.rdbuf()->in_avail());
 	}
 }
