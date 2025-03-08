@@ -38,6 +38,9 @@ namespace DungeonDelver::System::IO
 
 	bool IsAlphaNumeric(const std::string& string)
 	{
+		if (string.length() == 0)
+			return false;
+
 		for (char c : string)
 		{
 			if (!std::isalnum(c))
@@ -52,7 +55,7 @@ namespace DungeonDelver::System::IO
 			return false;
 
 		std::string testStr = string;
-		if (string.length() > 0 && string[0] == '-')
+		if (string.length() > 1 && string[0] == '-')
 		{
 			//Can still be numeric, just a negative
 			testStr = string.substr(1);
@@ -83,8 +86,11 @@ namespace DungeonDelver::System::IO
 
 	}
 
-	void WriteNewLines(std::ostream& output, int num)
+	void WriteNewLines(std::ostream& output, unsigned int num)
 	{
+		if (num == 0)
+			throw std::invalid_argument("Should not try to write 0 new lines!");
+
 		for (int i = 0; i < num; i++)
 			output << "\n";
 	}
@@ -103,7 +109,6 @@ namespace DungeonDelver::System::IO
 
 		Write(output, "Press Any Key To Continue...", true, inColor, color);
 		GetKey();
-		WriteNewLines(output);
 	}
 
 	void PressAnyKeyAlert(std::ostream& output, bool clearConsole, bool inColor, const std::string& color)

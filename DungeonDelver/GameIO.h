@@ -45,7 +45,7 @@ namespace DungeonDelver::System::IO
 	/// <param name="num">
 	/// The number of new line characters to print
 	/// </param>
-	void WriteNewLines(std::ostream& output = std::cout, int num = 1);
+	void WriteNewLines(std::ostream& output = std::cout, unsigned int num = 1);
 
 	/// <summary>
 	/// Displays a message followed by a Press Any Key To Continue... message
