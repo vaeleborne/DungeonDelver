@@ -10,10 +10,12 @@
 namespace DungeonDelver::System::IO
 {	
 	/// <summary>
-	/// Gets a key press
+	/// Gets a key press, for windows systems using cin uses getch, for non standard <br/>
+	/// input streams, reads the first character, <br/>
+	/// For non windows machines uses termios
 	/// </summary>
 	/// <returns>The character from the user</returns>
-	int GetKey();
+	int GetKey(std::istream& input = std::cin);
 
 	/// <summary>
 	/// Function to check if a string is alpha numeric
@@ -53,14 +55,14 @@ namespace DungeonDelver::System::IO
 	/// </summary>
 	/// <param name="message">The message to show the user</param>
 	/// <param name="clearConsole">Bool to optionally clear the console</param>
-	void PressAnyKeyAlert(std::ostream& output, const std::string& message = "", bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
+	void PressAnyKeyAlert(std::istream& input, std::ostream& output, const std::string& message = "", bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
 
 	/// <summary>
 	/// Displays Press Any Key To Continue...
 	/// Then waits for the user to press a key before returning
 	/// </summary>
 	/// <param name="clearConsole">Bool to optionally clear the console</param>
-	void PressAnyKeyAlert(std::ostream& output, bool clearConsole, bool inColor = false, const std::string& color = ANSI_WHITE);
+	void PressAnyKeyAlert(std::istream& input, std::ostream& output, bool clearConsole, bool inColor = false, const std::string& color = ANSI_WHITE);
 
 	/// <summary>
 	/// Ask a question to a user and gets either a 'y' or 'n', will loop asking until a 
@@ -70,7 +72,7 @@ namespace DungeonDelver::System::IO
 	/// <param name="question">The question to ask</param>
 	/// <param name="clearScreen">Bool to optionally clear the console</param>
 	/// <returns></returns>
-	bool AskYesNo(std::ostream& output, const std::string& question, bool clearScreen, bool inColor = false, const std::string& color = ANSI_WHITE);
+	bool AskYesNo(std::istream& input, std::ostream& output, const std::string& question, bool clearScreen, bool inColor = false, const std::string& color = ANSI_WHITE);
 
 	/// <summary>
 	/// Get an integer between two numbers from a user inclusively, can pass "" as custom message to get a default <br/>
@@ -131,8 +133,6 @@ namespace DungeonDelver::System::IO
 	/// <param name="inColor">Determines if we write in a specific color</param>
 	/// <param name="color">The color to write the text in</param>
 	void Write(std::ostream& output, const std::string& message, bool newLine = false, bool inColor = false, const std::string& color = ANSI_WHITE);
-
-
 }
 
 #endif

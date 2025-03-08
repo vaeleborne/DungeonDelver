@@ -1,4 +1,5 @@
 #include "GameIO.h"
+#include <stdio.h>
 //Includes dependent on build system
 #ifdef _WIN32
 #include <conio.h>
@@ -9,11 +10,24 @@
 
 namespace DungeonDelver::System::IO
 {
-	int GetKey()
+	int GetKey(std::istream& input)
 	{
 #ifdef _WIN32
+		if (&input != &std::cin)
+		{
+			//Non standard input stream, will just get a single character
+			int c =(int) input.get();
+			return c;
+		}
 		return _getch();
 #else
+		if (&input != &std::cin)
+		{
+			//Non standard input stream, will just get a single character
+			int c = input.get();
+			return c;
+		}
+
 		termios oldt{}, newt{};
 		int ch;
 
@@ -95,7 +109,7 @@ namespace DungeonDelver::System::IO
 			output << "\n";
 	}
 
-	void PressAnyKeyAlert(std::ostream& output, const std::string& message, bool clearConsole, bool inColor, const std::string& color)
+	void PressAnyKeyAlert(std::istream& input, std::ostream& output, const std::string& message, bool clearConsole, bool inColor, const std::string& color)
 	{
 		if (clearConsole)
 		{
@@ -108,10 +122,10 @@ namespace DungeonDelver::System::IO
 		}
 
 		Write(output, "Press Any Key To Continue...", true, inColor, color);
-		GetKey();
+		GetKey(input);
 	}
 
-	void PressAnyKeyAlert(std::ostream& output, bool clearConsole, bool inColor, const std::string& color)
+	void PressAnyKeyAlert(std::istream& input, std::ostream& output, bool clearConsole, bool inColor, const std::string& color)
 	{
 
 		if (clearConsole)
@@ -120,11 +134,11 @@ namespace DungeonDelver::System::IO
 		}
 
 		Write(output, "Press Any Key To Continue...", true, inColor, color);
-		GetKey();
+		GetKey(input);
 		WriteNewLines(output);
 	}
 
-	bool AskYesNo(std::ostream& output, const std::string& question, bool clearScreen, bool inColor, const std::string& color)
+	bool AskYesNo(std::istream& input, std::ostream& output, const std::string& question, bool clearScreen, bool inColor, const std::string& color)
 	{
 		bool validInput = false;
 		do
@@ -134,16 +148,16 @@ namespace DungeonDelver::System::IO
 
 			Write(output, question + "\nInput (y/n): ", false, inColor, color);
 
-			char input = GetKey();
+			char inputKey = GetKey(input);
 
-			if (std::isalpha(input))
+			if (std::isalpha(inputKey))
 			{
-				input = std::tolower(input);
-				if (input == 'y')
+				inputKey = std::tolower(inputKey);
+				if (inputKey == 'y')
 				{
 					return true;
 				}
-				else if (input == 'n')
+				else if (inputKey == 'n')
 				{
 					return false;
 				}

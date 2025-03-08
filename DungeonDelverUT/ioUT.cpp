@@ -151,7 +151,7 @@ static TEST(OutputTests, PressAnyKeyAlert_NoAdditionalMessage_ShowsCorrectPrompt
 	std::stringstream expected;
 
 	expected << "Press Any Key To Continue...\n";
-	io::PressAnyKeyAlert(actual, false);
+	io::PressAnyKeyAlert(std::cin, actual, false);
 	EXPECT_EQ(expected.str(), actual.str());
 }
 
@@ -160,8 +160,9 @@ static TEST(OutputTests, PressAnyKeyAlert_NoAdditionalMessage_ShowsCorrectPrompt
 	std::stringstream actual;
 	std::stringstream expected;
 
+
 	expected << "\x1b[2J\x1b[HPress Any Key To Continue...\n";
-	io::PressAnyKeyAlert(actual, true);
+	io::PressAnyKeyAlert(std::cin, actual, true);
 	EXPECT_EQ(expected.str(), actual.str());
 }
 
@@ -171,7 +172,7 @@ static TEST(OutputTests, PressAnyKeyAlert_NoAdditionalMessage_ShowsCorrectPrompt
 	std::stringstream expected;
 
 	expected << "\x1b[2J\x1b[H" << ANSI_BLUE <<  "Press Any Key To Continue...\n" << ANSI_RESET;
-	io::PressAnyKeyAlert(actual, true, true, ANSI_BLUE);
+	io::PressAnyKeyAlert(std::cin, actual, true, true, ANSI_BLUE);
 	EXPECT_EQ(expected.str(), actual.str());
 }
 
