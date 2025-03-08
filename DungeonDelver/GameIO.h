@@ -53,32 +53,14 @@ namespace DungeonDelver::System::IO
 	/// </summary>
 	/// <param name="message">The message to show the user</param>
 	/// <param name="clearConsole">Bool to optionally clear the console</param>
-	void PressAnyKeyAlert(std::ostream& output, const std::string& message = "", bool clearConsole = false);
+	void PressAnyKeyAlert(std::ostream& output, const std::string& message = "", bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
 
 	/// <summary>
 	/// Displays Press Any Key To Continue...
 	/// Then waits for the user to press a key before returning
 	/// </summary>
 	/// <param name="clearConsole">Bool to optionally clear the console</param>
-	void PressAnyKeyAlert(std::ostream& output, bool clearConsole);
-
-	/// <summary>
-	/// Displays Press Any Key To Continue... in a passed in color, or in RED by default
-	/// Then waits for the user to press a key before returning
-	/// </summary>
-	/// <param name="color">Color to write in</param>
-	/// <param name="clearConsole">Bool to optionally clear the console</param>
-	void PressAnyKeyAlertInColor(std::ostream& output, const std::string& color, bool clearConsole);
-
-	/// <summary>
-	/// Displays a message followed by a Press Any Key To Continue... message
-	/// These are displayed in a passed in color
-	/// Then waits for the user to press a key before returning
-	/// </summary>
-	/// <param name="message">Message to display</param>
-	/// <param name="color">Color to write in</param>
-	/// <param name="clearConsole">Bool to optionally clear the console</param>
-	void PressAnyKeyAlertInColor(std::ostream& output, const std::string& message, const std::string& color, bool clearConsole);
+	void PressAnyKeyAlert(std::ostream& output, bool clearConsole, bool inColor = false, const std::string& color = ANSI_WHITE);
 
 	/// <summary>
 	/// Ask a question to a user and gets either a 'y' or 'n', will loop asking until a 
@@ -88,30 +70,21 @@ namespace DungeonDelver::System::IO
 	/// <param name="question">The question to ask</param>
 	/// <param name="clearScreen">Bool to optionally clear the console</param>
 	/// <returns></returns>
-	bool AskYesNo(std::ostream& output, const std::string& question, bool clearScreen);
+	bool AskYesNo(std::ostream& output, const std::string& question, bool clearScreen, bool inColor = false, const std::string& color = ANSI_WHITE);
 
 	/// <summary>
-	/// Ask a question to a user and gets either a 'y' or 'n', will loop asking until a 
-	/// valid choice is chosen. If the user presses 'y' this will return true, if they
-	/// press 'n' it will return false
-	/// </summary>
-	/// <param name="question">The question to ask</param>
-	/// <param name="color">Color to ask question in</param>
-	/// <param name="clearScreen">Bool to optionally clear the console</param>
-	/// <returns></returns>
-	bool AskYesNo(std::ostream& output, const std::string& question, const std::string& color, bool clearScreen);
-
-	/// <summary>
-	/// Get an integer between two numbers from a user inclusively
+	/// Get an integer between two numbers from a user inclusively, can pass "" as custom message to get a default <br/>
+	/// Message asking the user to enter a number between the two values inclusively
 	/// </summary>
 	/// <param name="in">The input stream to use</param>
 	/// <param name="min">Minimum value</param>
+	/// <param name="customMessage">Optional to display a custom prompt, enter "" for default</param>
 	/// <param name="max">Maximum value</param>
 	/// <param name="clearConsole">Whether or not to clear the console when asking</param>
 	/// <param name="inColor">Whether or not to ask in a color</param>
 	/// <param name="color">The color to ask in if applicable</param>
 	/// <returns>An integer between min and max either inclusively</returns>
-	int GetIntFromUser(std::istream& in, std::ostream& output, int min, int max, bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
+	int GetIntFromUser(std::istream& in, std::ostream& output, int min, int max,  std::string customMessage = "", bool clearConsole = false, bool inColor = false, const std::string & color = ANSI_WHITE);
 
 	/// <summary>
 	/// Writes a centered heading based on a minimum length and a minimum padding value
@@ -129,7 +102,22 @@ namespace DungeonDelver::System::IO
 	void WriteHeading(std::ostream& output, const std::string& heading, int minimumLength = 60, int minimumPadding = 5, 
 		bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
 
-	int GetIndexOfUserChoice(std::ostream& output, const std::vector<std::string>& options, bool askInColor = false, const std::string& color = ANSI_WHITE);
+	/// <summary>
+	/// Takes a vector of strings that are 'options' to display to the user. <br/>
+	/// Displays them with a number that starts at 1 such as 1) Option 1 <br/>
+	/// Gets a valid corresponding number from the user, will loop asking for a number if invalid but not clear console. <br/>
+	/// Returns the index equivalent of the users choice, ie if they enter 1 for option 1 this will return 0 so you can index the vector.<br/>
+	/// If an empty vector is passed in this will return -1!
+	/// </summary>
+	/// <param name="input">The input stream to use</param>
+	/// <param name="output">The output stream to use</param>
+	/// <param name="options">A vector containing options</param>
+	/// <param name="askInColor">Option to ask in color</param>
+	/// <param name="color">The color to write in if askInColor is true</param>
+	/// <returns>
+	/// The index of the option a user chooses, or -1 
+	/// </returns>
+	int GetIndexOfUserChoice(std::istream& input, std::ostream& output, const std::vector<std::string>& options, bool askInColor = false, const std::string& color = ANSI_WHITE);
 
 	/// <summary>
 	/// Writes a message to an output stream, optionally writes it in a color with a default of white <br/> 
@@ -143,6 +131,8 @@ namespace DungeonDelver::System::IO
 	/// <param name="inColor">Determines if we write in a specific color</param>
 	/// <param name="color">The color to write the text in</param>
 	void Write(std::ostream& output, const std::string& message, bool newLine = false, bool inColor = false, const std::string& color = ANSI_WHITE);
+
+
 }
 
 #endif

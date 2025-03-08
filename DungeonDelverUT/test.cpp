@@ -62,3 +62,21 @@ static TEST(InputTests, GetIntFromUser_ReturnsExpectedValues)
 	actualInt = DungeonDelver::System::IO::GetIntFromUser(mockInput, mockOutput, -10, 10);
 	EXPECT_EQ(expectedInt, actualInt);
 }
+
+static TEST(InputTests, GetIndexOfUserChoice_ReturnsProperIndex)
+{
+	std::vector<std::string> options;
+
+	options.push_back("Option 1");
+	options.push_back("Option 2");
+	options.push_back("Option 3");
+
+	std::istringstream mockInput("1\n");
+	std::stringstream mockOutput;
+
+	int index = DungeonDelver::System::IO::GetIndexOfUserChoice(mockInput, mockOutput, options, true, ANSI_YELLOW);
+	std::cout << "\n";
+
+	EXPECT_EQ(0, index);
+
+}
