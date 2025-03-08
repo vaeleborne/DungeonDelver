@@ -15,12 +15,12 @@ namespace io = DungeonDelver::System::IO;
 
 static TEST(InputTest, GetKey_ReturnsExpectedKey)
 {
-	std::istringstream mockInput(' ');
-	EXPECT_EQ(' ', io::GetKey(mockInput));
+	std::istringstream mockInput(" ");
+	EXPECT_EQ(32, io::GetKey(mockInput));
 
 	mockInput.str("23");
 
-	EXPECT_EQ('2', io::GetKey(mockInput));
+	EXPECT_EQ(50, io::GetKey(mockInput));
 }
 
 
@@ -184,7 +184,7 @@ static TEST(OutputTests, PressAnyKeyAlert_NoAdditionalMessage_ShowsCorrectPrompt
 	std::stringstream expected;
 	std::istringstream keyPress(' ');
 
-	expected << "\x1b[2J\x1b[H" << ANSI_BLUE <<  "Press Any Key To Continue...\n" << ANSI_RESET;
+	expected << "\x1b[2J\x1b[H" << ANSI_BLUE <<  "Press Any Key To Continue..." << ANSI_RESET << "\n";
 	io::PressAnyKeyAlert(keyPress, actual, true, true, ANSI_BLUE);
 	EXPECT_EQ(expected.str(), actual.str());
 }

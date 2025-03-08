@@ -16,7 +16,8 @@ namespace DungeonDelver::System::IO
 		if (&input != &std::cin)
 		{
 			//Non standard input stream, will just get a single character
-			int c =(int) input.get();
+			char c;
+			input.get(c);
 			return c;
 		}
 		return _getch();
@@ -135,7 +136,6 @@ namespace DungeonDelver::System::IO
 
 		Write(output, "Press Any Key To Continue...", true, inColor, color);
 		GetKey(input);
-		WriteNewLines(output);
 	}
 
 	bool AskYesNo(std::istream& input, std::ostream& output, const std::string& question, bool clearScreen, bool inColor, const std::string& color)
