@@ -13,6 +13,17 @@
 
 namespace io = DungeonDelver::System::IO;
 
+static TEST(InputTest, GetKey_ReturnsExpectedKey)
+{
+	std::istringstream mockInput(' ');
+	EXPECT_EQ(' ', io::GetKey(mockInput));
+
+	mockInput.str("23");
+
+	EXPECT_EQ('2', io::GetKey(mockInput));
+}
+
+
 //LOGIC TESTING
 
 static TEST(LogicTests, IsAlphaNumeric_ReturnsExpectedValues)
@@ -149,9 +160,10 @@ static TEST(OutputTests, PressAnyKeyAlert_NoAdditionalMessage_ShowsCorrectPrompt
 {
 	std::stringstream actual;
 	std::stringstream expected;
+	std::istringstream keyPress(' ');
 
 	expected << "Press Any Key To Continue...\n";
-	io::PressAnyKeyAlert(std::cin, actual, false);
+	io::PressAnyKeyAlert(keyPress, actual, false);
 	EXPECT_EQ(expected.str(), actual.str());
 }
 
@@ -159,10 +171,10 @@ static TEST(OutputTests, PressAnyKeyAlert_NoAdditionalMessage_ShowsCorrectPrompt
 {
 	std::stringstream actual;
 	std::stringstream expected;
-
+	std::istringstream keyPress(' ');
 
 	expected << "\x1b[2J\x1b[HPress Any Key To Continue...\n";
-	io::PressAnyKeyAlert(std::cin, actual, true);
+	io::PressAnyKeyAlert(keyPress, actual, true);
 	EXPECT_EQ(expected.str(), actual.str());
 }
 
@@ -170,9 +182,10 @@ static TEST(OutputTests, PressAnyKeyAlert_NoAdditionalMessage_ShowsCorrectPrompt
 {
 	std::stringstream actual;
 	std::stringstream expected;
+	std::istringstream keyPress(' ');
 
 	expected << "\x1b[2J\x1b[H" << ANSI_BLUE <<  "Press Any Key To Continue...\n" << ANSI_RESET;
-	io::PressAnyKeyAlert(std::cin, actual, true, true, ANSI_BLUE);
+	io::PressAnyKeyAlert(keyPress, actual, true, true, ANSI_BLUE);
 	EXPECT_EQ(expected.str(), actual.str());
 }
 
