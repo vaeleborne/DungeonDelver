@@ -191,30 +191,63 @@ static TEST(OutputTests, PressAnyKeyAlert_NoAdditionalMessage_ShowsCorrectPrompt
 
 static TEST(OutputTests, PressAnyKeyAlert_NoAdditionalMessage_ShowsCorrectPrompt_WithColor_NoClearConsole)
 {
+	std::stringstream actual;
+	std::stringstream expected;
+	std::istringstream keyPress(' ');
 
+	expected << ANSI_BLUE << "Press Any Key To Continue..." << ANSI_RESET << "\n";
+
+	io::PressAnyKeyAlert(keyPress, actual, false, true, ANSI_BLUE);
+	EXPECT_EQ(expected.str(), actual.str());
 }
-
-
-//TODO: Add Inputstream method to the press any key alert,
 
 static TEST(OutputTests, PressAnyKeyAlert_CustomAdditionalMessage_ShowsCorrectPrompt_NoColor_NoClearConsole)
 {
+	std::stringstream actual;
+	std::stringstream expected;
+	std::string message = "Unit Testing!";
+	std::istringstream keyPress(' ');
 
+	expected << message << "\nPress Any Key To Continue...\n";
+	io::PressAnyKeyAlert(keyPress, actual, message, false);
+	EXPECT_EQ(expected.str(), actual.str());
 }
 
 static TEST(OutputTests, PressAnyKeyAlert_CustomAdditionalMessage_ShowsCorrectPrompt_NoColor_WithClearConsole)
 {
+	std::stringstream actual;
+	std::stringstream expected;
+	std::string message = "Unit Testing!";
+	std::istringstream keyPress(' ');
+
+	expected << "\x1b[2J\x1b[H" << message << "\nPress Any Key To Continue...\n";
+	io::PressAnyKeyAlert(keyPress, actual, message, true);
+	EXPECT_EQ(expected.str(), actual.str());
 
 }
 
 static TEST(OutputTests, PressAnyKeyAlert_CustomAdditionalMessage_ShowsCorrectPrompt_WithColor_WithClearConsole)
 {
+	std::stringstream actual;
+	std::stringstream expected;
+	std::string message = "Unit Testing!";
+	std::istringstream keyPress(' ');
 
+	expected << "\x1b[2J\x1b[H" << ANSI_YELLOW << message  << ANSI_RESET << "\n" << ANSI_YELLOW << "Press Any Key To Continue..." << ANSI_RESET << "\n";
+	io::PressAnyKeyAlert(keyPress, actual, message, true, true, ANSI_YELLOW);
+	EXPECT_EQ(expected.str(), actual.str());
 }
 
 static TEST(OutputTests, PressAnyKeyAlert_CustomAdditionalMessage_ShowsCorrectPrompt_WithColor_NoClearConsole)
 {
+	std::stringstream actual;
+	std::stringstream expected;
+	std::string message = "Unit Testing!";
+	std::istringstream keyPress(' ');
 
+	expected << ANSI_YELLOW << message << ANSI_RESET << "\n" << ANSI_YELLOW << "Press Any Key To Continue..." << ANSI_RESET << "\n";
+	io::PressAnyKeyAlert(keyPress, actual, message, false, true, ANSI_YELLOW);
+	EXPECT_EQ(expected.str(), actual.str());
 }
 
 //INPUT TESTING
