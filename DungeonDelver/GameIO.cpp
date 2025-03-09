@@ -262,7 +262,112 @@ namespace DungeonDelver::System::IO
 		return index - 1;
 	}
 
+	std::string GetTrimmedLineFromUser(std::istream& input)
+	{
+		std::string untrimmed = "";
+		std::getline(input, untrimmed);
+		FlushInputBuffer(input);
 
+		if (untrimmed.length() == 0)
+		{
+			throw std::invalid_argument("Cannot trim an empty string!");
+		}
+
+		int startIndex = 0;
+		int endIndex = untrimmed.length() - 1;
+
+		if (untrimmed.starts_with(' '))
+		{
+			for (int i = 0; i < untrimmed.length(); i++)
+			{
+				if (untrimmed[i] != ' ')
+				{
+					startIndex = i;
+					break;
+				}
+			}
+		}
+
+		if (untrimmed.ends_with(' '))
+		{
+			for (int i = endIndex; i > 0; i--)
+			{
+				if (untrimmed[i] != ' ')
+				{
+					endIndex = i;
+					break;
+				}
+			}
+		}
+
+		return untrimmed.substr(startIndex, endIndex + 1);		
+	}
+
+	void PauseForSeconds(int seconds)
+	{
+		std::this_thread::sleep_for(std::chrono::seconds(seconds));
+	}
+
+	void PauseForMilliseconds(int ms)
+	{
+		std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+	}
+
+	std::string ReadFileToString(const std::string& filepath)
+	{
+		std::ifstream file(filepath);
+
+		if (!file.is_open())
+		{
+			throw std::runtime_error("Could Not Open File: " + filepath);
+		}
+
+		//If we get here, the file is open
+		std::string line;
+		std::stringstream contents;
+		while (std::getline(file, line))
+		{
+			contents << line << '\n';
+		}
+
+		file.close();
+	}
+
+	void WriteStringToFile(const std::string& filepath, const std::string& content, bool clearFileFirst = true)
+	{
+		std::ofstream file;
+
+		if (clearFileFirst == false)
+			file.open(filepath, std::ios::app);
+		else
+			file.open(filepath);
+
+		if (!file.is_open())
+		{
+			throw std::runtime_error("Could Not Open File: " + filepath);
+		}
+
+		file << content;
+		file.close();
+	}
+
+	std::string ReadLineWithPrompt(std::istream& input, std::ostream& output, const std::string& prompt, bool clearConsole,
+		bool inColor, const std::string& color)
+	{
+		if (clearConsole)
+			ClearConsole();
+
+		Write(output, prompt, true, inColor, color);
+		Write(output, "-> ", false, inColor, color);
+		return GetTrimmedLineFromUser(input);
+	}
+
+	int GetMenuSelection(std::istream& input, std::ostream& output, const std::vector<std::string>& menuItems,
+		const std::string& header, bool clearConsole, bool inColor, const std::string& color)
+	{
+		WriteHeading(output, header, 30, 5, clearConsole, inColor, color);
+		return GetIndexOfUserChoice(input, output, menuItems, inColor, color);
+	}
 }
 
 	

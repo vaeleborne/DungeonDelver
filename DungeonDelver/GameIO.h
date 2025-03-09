@@ -4,6 +4,9 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <thread>
+#include <chrono>
+#include <fstream>
 #include "ANSI_Colors.h"
 #include "GameMath.h"
 
@@ -133,6 +136,60 @@ namespace DungeonDelver::System::IO
 	/// <param name="inColor">Determines if we write in a specific color</param>
 	/// <param name="color">The color to write the text in</param>
 	void Write(std::ostream& output, const std::string& message, bool newLine = false, bool inColor = false, const std::string& color = ANSI_WHITE);
+
+	/// <summary>
+	/// Gets a line input from a user and trims any spaces from the start and end of it
+	/// </summary>
+	/// <param name="input">
+	/// The input stream to use, defaults to cin
+	/// </param>
+	/// <returns>
+	/// A string from a getline with any leading and trailing ' ' removed
+	/// </returns>
+	std::string GetTrimmedLineFromUser(std::istream& input = std::cin);
+
+	/// <summary>
+	/// Pauses program execution for a set number of seconds
+	/// </summary>
+	/// <param name="seconds">Number of Seconds</param>
+	void PauseForSeconds(int seconds);
+
+	/// <summary>
+	/// Pauses program execution for a set number of milliseconds
+	/// </summary>
+	/// <param name="ms">
+	/// Number of Milliseconds
+	/// </param>
+	void PauseForMilliseconds(int ms);
+
+	/// <summary>
+	/// Reads the contents of a file into a string to return, each line will have a newline character
+	/// </summary>
+	/// <param name="filepath">
+	/// The path to our file
+	/// </param>
+	/// <returns>
+	/// A string containing the contents of the file
+	/// </returns>
+	std::string ReadFileToString(const std::string& filepath);
+
+	/// <summary>
+	/// Writes a string to a file, can set clearFileFirst to false to simply append to the file
+	/// </summary>
+	/// <param name="filepath">
+	/// The path to our file
+	/// </param>
+	/// <param name="content">
+	/// What to write to the file
+	/// </param>
+	/// <param name="clearFileFirst">
+	/// If we should clear the file before writing to it, defaults to true
+	/// </param>
+	void WriteStringToFile(const std::string& filepath, const std::string& content, bool clearFileFirst = true);
+
+	int GetMenuSelection(std::istream& input, std::ostream& output, const std::vector<std::string>& menuItems,
+		const std::string& header = "", bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
+
 }
 
 #endif
