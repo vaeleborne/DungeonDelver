@@ -1,5 +1,5 @@
-#ifndef GAME_IO_H
-#define GAME_IO_H
+#ifndef GAME_IO_HPP
+#define GAME_IO_HPP
 
 /*******************************************************************
 * AUTHOR: Dylan Morgan

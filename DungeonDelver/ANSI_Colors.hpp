@@ -1,5 +1,5 @@
-#ifndef ANSI_COLORS_H
-#define ANSI_COLORS_H
+#ifndef ANSI_COLORS_HPP
+#define ANSI_COLORS_HPP
 
 //Reset
 #define ANSI_RESET		"\x1b[0m"

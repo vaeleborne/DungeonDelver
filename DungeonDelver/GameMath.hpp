@@ -1,5 +1,5 @@
-#ifndef GAME_MATH_H
-#define GAME_MATH_H
+#ifndef GAME_MATH_HPP
+#define GAME_MATH_HPP
 
 /*******************************************************************
 * AUTHOR: Dylan Morgan
