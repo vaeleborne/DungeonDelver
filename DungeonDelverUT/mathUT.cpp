@@ -211,7 +211,7 @@ static TEST(MathTests, RoundToPrecision_RoundsFloatsCorrectly)
 	float pi = 3.141592;
 
 	float shortPi = 3.14f;
-	float moderatePi = 3.141f;
+	float moderatePi = 3.142f;
 	float zeroPi = 3.f;
 	float longPi = 3.141592f;
 
@@ -220,3 +220,4 @@ static TEST(MathTests, RoundToPrecision_RoundsFloatsCorrectly)
 	EXPECT_EQ(zeroPi, mth::RoundToPrecision(pi, 0));
 	EXPECT_EQ(longPi, mth::RoundToPrecision(pi, 200));
 }
+

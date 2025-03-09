@@ -34,7 +34,6 @@ namespace DungeonDelver::System::Math
 		return value < min ? min : value > max ? max : value;
 	}
 
-
 	float Clamp(float value, float min, float max)
 	{
 		return value < min ? min : value > max ? max : value;
@@ -77,6 +76,10 @@ namespace DungeonDelver::System::Math
 
 	float RoundToPrecision(float value, int precision)
 	{
-		throw "Not Implemented";
+		//Maximum float precision of 7
+		if (precision > 7)
+			precision = 7;
+		float factor = std::pow(10.f, precision);
+		return std::round(value * factor) / factor;
 	}
 }

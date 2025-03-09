@@ -3,6 +3,9 @@
 #include <stdexcept>
 #include <random>
 #include <math.h>
+#include <cmath>
+#include <string>
+#include <sstream>
 
 namespace DungeonDelver::System::Math
 {
@@ -68,5 +71,6 @@ namespace DungeonDelver::System::Math
 	/// </summary>
 	/// <returns>The distance between 2 points, linearly</returns>
 	float GetDistance(int x1, int y1, int x2, int y2);
+
 }
 #endif
