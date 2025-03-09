@@ -8,6 +8,7 @@
 
 #include "pch.h"
 #include <sstream>
+#include <chrono>
 #include "../DungeonDelver/GameIO.h"
 
 
@@ -259,6 +260,36 @@ static TEST(OutputTests, PressAnyKeyAlert_CustomAdditionalMessage_ShowsCorrectPr
 	EXPECT_EQ(expected.str(), actual.str());
 }
 
+static TEST(OutputTests, PauseForSeconds_CorrectTimeWaited)
+{
+	const int pauseDuration = 1;
+	const auto allowedMarginMs = 50;
+
+	auto start = std::chrono::steady_clock::now();
+	io::PauseForSeconds(pauseDuration);
+	auto end = std::chrono::steady_clock::now();
+
+	auto elapsedMs = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+
+	EXPECT_GE(elapsedMs, pauseDuration * 1000);
+	EXPECT_LE(elapsedMs, (pauseDuration * 1000) + allowedMarginMs);
+}
+
+static TEST(OutputTests, PauseForMilliseconds_CorrectTimeWaited)
+{
+	const int pauseDuration = 200;
+	const auto allowedMarginMs = 50;
+
+	auto start = std::chrono::steady_clock::now();
+	io::PauseForMilliseconds(pauseDuration);
+	auto end = std::chrono::steady_clock::now();
+
+	auto elapsedMs = std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count();
+
+	EXPECT_GE(elapsedMs, pauseDuration);
+	EXPECT_LE(elapsedMs, pauseDuration + allowedMarginMs);
+}
+
 //INPUT TESTING
 
 static TEST(InputTests, AskYesNo_ReturnsTrueWhenInputIsY)
@@ -345,6 +376,8 @@ static TEST(InputTests, GetTrimmedLineFromUser_ReturnsExpectedValue)
 	mockIn.str(" Testing \n");
 	EXPECT_EQ(expected, io::GetTrimmedLineFromUser(mockIn));
 }
+
+
 
 
 
