@@ -2,7 +2,7 @@
 
 namespace DungeonDelver::System::Math
 {
-	bool IsBetween(int number, int min, int max, bool inclusive)
+	bool IsBetween(int number, int min, int max, bool maxInclusive, bool minInclusive)
 	{
 		if (min > max)
 		{
@@ -11,17 +11,63 @@ namespace DungeonDelver::System::Math
 			max = temp;
 		}
 
-		if (!inclusive)
+		if (min == max && !maxInclusive && !minInclusive)
 		{
-			if (min == max)
-			{
-				throw "Error! Cannot find a number between the same number exclusively!";
-			}
+			throw std::invalid_argument("Error! Cannot find a number between the same number exclusively!");
+		}
 
-			min++;
+		if (!maxInclusive)
+		{
 			max--;
 		}
 
+		if (!minInclusive)
+		{
+			min++;
+		}
+
 		return number >= min && number <= max;
+	}
+
+	int Clamp(int value, int min, int max)
+	{
+		return value < min ? min : value > max ? max : value;
+	}
+
+
+	float Clamp(float value, float min, float max)
+	{
+		return value < min ? min : value > max ? max : value;
+	}
+
+	int RandomInt(int min, int max, bool maxInclusive, bool minInclusive)
+	{
+		static std::random_device rd;
+		static std::mt19937 engine(rd());
+
+		if (!maxInclusive)
+			max--;
+
+		if (!minInclusive)
+			min++;
+
+		std::uniform_int_distribution<int> dist(min, max);
+
+		return dist(engine);
+	}
+
+	bool IsChanceSuccessful(int percentage)
+	{
+		return RandomInt(1, 100) <= percentage;
+	}
+
+	float GetDistance(int x1, int y1, int x2, int y2)
+	{
+		int xDif = std::abs(x1 - x2);
+		int yDif = std::abs(y1 - y2);
+
+		float radicand = xDif * xDif + yDif * yDif;
+
+		return std::sqrtf(radicand);
 	}
 }
