@@ -162,7 +162,6 @@ namespace DungeonDelver::System::IO
 					return false;
 				}
 			}
-			FlushInputBuffer(std::cin);
 			WriteNewLines(output);
 			Write(output, "Invalid!", true, true, ANSI_RED);
 

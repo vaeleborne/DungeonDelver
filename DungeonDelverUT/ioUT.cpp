@@ -13,14 +13,23 @@
 
 namespace io = DungeonDelver::System::IO;
 
+//GET KEY TEST, USED IN SEVERAL OTHERS SO TESTING FIRST
 static TEST(InputTest, GetKey_ReturnsExpectedKey)
 {
 	std::istringstream mockInput(" ");
-	EXPECT_EQ(32, io::GetKey(mockInput));
+	EXPECT_EQ(0x20, io::GetKey(mockInput));
 
 	mockInput.str("23");
 
-	EXPECT_EQ(50, io::GetKey(mockInput));
+	EXPECT_EQ(0x32, io::GetKey(mockInput));
+}
+
+static TEST(InputTest, GetKey_ReturnsExpectedKeyWithinLoopedInput)
+{
+	std::istringstream mockInput("23a");
+	EXPECT_EQ(0x32, io::GetKey(mockInput));
+	EXPECT_EQ(0x33, io::GetKey(mockInput));
+	EXPECT_EQ(0x61, io::GetKey(mockInput));
 }
 
 
@@ -252,6 +261,35 @@ static TEST(OutputTests, PressAnyKeyAlert_CustomAdditionalMessage_ShowsCorrectPr
 
 //INPUT TESTING
 
+static TEST(InputTests, AskYesNo_ReturnsTrueWhenInputIsY)
+{
+	std::istringstream mockInput("y");
+	std::stringstream out;
+	EXPECT_TRUE(io::AskYesNo(mockInput, out, "Unit Test Answers y", false));
+
+	mockInput.str("Y");
+	EXPECT_TRUE(io::AskYesNo(mockInput, out, "Unit Test Answers Y", false));
+}
+
+static TEST(InputTests, AskYesNo_ReturnsFalseWhenInputIsN)
+{
+	std::istringstream mockInput("n");
+	std::stringstream out;
+	EXPECT_FALSE(io::AskYesNo(mockInput, out, "Unit Test Answers n", false));
+
+	mockInput.str("N");
+	EXPECT_FALSE(io::AskYesNo(mockInput, out, "Unit Test Answers N", false));
+}
+
+static TEST(InputTests, AskYesNo_AsksMoreThanOnceUntilValidInputIsGiven)
+{
+	std::istringstream mockInput("a23y");
+	std::stringstream out;
+	EXPECT_TRUE(io::AskYesNo(mockInput, out, "Unit Test Answers y", false));
+
+	mockInput.str("j82!n");
+	EXPECT_FALSE(io::AskYesNo(mockInput, out, "Unit Test Answers y", false));
+}
 
 static TEST(InputTests, GetIntFromUser_ReturnsExpectedValues)
 {
@@ -288,3 +326,4 @@ static TEST(InputTests, GetIndexOfUserChoice_ReturnsProperIndex)
 	EXPECT_EQ(0, index);
 
 }
+
