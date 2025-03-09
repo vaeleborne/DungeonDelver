@@ -299,7 +299,7 @@ namespace DungeonDelver::System::IO
 			}
 		}
 
-		return untrimmed.substr(startIndex, endIndex + 1);		
+		return untrimmed.substr(startIndex, (endIndex + 1) - startIndex);		
 	}
 
 	void PauseForSeconds(int seconds)
