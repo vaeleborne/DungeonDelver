@@ -148,8 +148,8 @@ static TEST(MathTests, RandomInt_LikelyGettingRandomValuesWithinRange)
 
 static TEST(MathTests, IsChanceSuccessful_ThrowsErrorWhenOutOfRangeParameter)
 {
-	EXPECT_THROW(mth::IsChanceSuccessful(-1), std::runtime_error);
-	EXPECT_THROW(mth::IsChanceSuccessful(101), std::runtime_error);
+	EXPECT_THROW(mth::IsChanceSuccessful(-1), std::invalid_argument);
+	EXPECT_THROW(mth::IsChanceSuccessful(101), std::invalid_argument);
 }
 
 static TEST(MathTests, IsChanceSuccessful_ReturnsTrueWhen100Percent)
@@ -192,4 +192,31 @@ static TEST(MathTests, IsChanceSuccessful_LikelyWorksTestingFiftyFifty)
 	}
 
 	EXPECT_TRUE(likelyWorking);
+}
+
+static TEST(MathTests, GetDistance_ReturnsExpectedValues)
+{
+	int x1 = 2;
+	int x2 = 4;
+	int y1 = 4;
+	int y2 = 2;
+	
+	float expected = 2.828427f;	//Sqrt of 8
+
+	EXPECT_NEAR(expected, mth::GetDistance(x1, y1, x2, y2), 1e-5);
+}
+
+static TEST(MathTests, RoundToPrecision_RoundsFloatsCorrectly)
+{
+	float pi = 3.141592;
+
+	float shortPi = 3.14f;
+	float moderatePi = 3.141f;
+	float zeroPi = 3.f;
+	float longPi = 3.141592f;
+
+	EXPECT_EQ(shortPi, mth::RoundToPrecision(pi, 2));
+	EXPECT_EQ(moderatePi, mth::RoundToPrecision(pi, 3));
+	EXPECT_EQ(zeroPi, mth::RoundToPrecision(pi, 0));
+	EXPECT_EQ(longPi, mth::RoundToPrecision(pi, 200));
 }

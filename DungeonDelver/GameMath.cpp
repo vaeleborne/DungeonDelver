@@ -74,4 +74,9 @@ namespace DungeonDelver::System::Math
 
 		return std::sqrtf(radicand);
 	}
+
+	float RoundToPrecision(float value, int precision)
+	{
+		throw "Not Implemented";
+	}
 }
