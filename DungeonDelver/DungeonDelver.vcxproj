@@ -131,13 +131,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="GameIO.cpp" />
     <ClCompile Include="GameMath.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ANSI_Colors.hpp" />
+    <ClInclude Include="FileIO.hpp" />
     <ClInclude Include="GameIO.hpp" />
     <ClInclude Include="GameMath.hpp" />
+    <ClInclude Include="IFileIO.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
