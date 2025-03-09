@@ -58,6 +58,10 @@ namespace DungeonDelver::System::Math
 
 	bool IsChanceSuccessful(int percentage)
 	{
+		if (percentage < 0 || percentage > 100)
+		{
+			throw std::invalid_argument("Percentage must be between 0-100 for testing chance!");
+		}
 		return RandomInt(1, 100) <= percentage;
 	}
 
