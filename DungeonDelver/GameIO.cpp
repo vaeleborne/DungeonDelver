@@ -312,44 +312,6 @@ namespace DungeonDelver::System::IO
 		std::this_thread::sleep_for(std::chrono::milliseconds(ms));
 	}
 
-	std::string ReadFileToString(const std::string& filepath)
-	{
-		std::ifstream file(filepath);
-
-		if (!file.is_open())
-		{
-			throw std::runtime_error("Could Not Open File: " + filepath);
-		}
-
-		//If we get here, the file is open
-		std::string line;
-		std::stringstream contents;
-		while (std::getline(file, line))
-		{
-			contents << line << '\n';
-		}
-
-		file.close();
-	}
-
-	void WriteStringToFile(const std::string& filepath, const std::string& content, bool clearFileFirst)
-	{
-		std::ofstream file;
-
-		if (clearFileFirst == false)
-			file.open(filepath, std::ios::app);
-		else
-			file.open(filepath);
-
-		if (!file.is_open())
-		{
-			throw std::runtime_error("Could Not Open File: " + filepath);
-		}
-
-		file << content;
-		file.close();
-	}
-
 	std::string ReadLineWithPrompt(std::istream& input, std::ostream& output, const std::string& prompt, bool clearConsole,
 		bool inColor, const std::string& color)
 	{

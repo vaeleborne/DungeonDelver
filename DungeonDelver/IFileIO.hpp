@@ -15,7 +15,9 @@ namespace DungeonDelver::System::IO
 	public:
 		virtual ~IFileIO() = default;
 
-		virtual bool WriteStringToFile(const std::string& fileName, const std::string& content) = 0;
+
+		virtual bool WriteStringToFile(const std::string& fileName, const std::string& content, bool clearFileFirst) = 0;
+
 		virtual bool ReadStringFromFile(const std::string& fileName, std::string& destinationStr) = 0;
 	};
 }

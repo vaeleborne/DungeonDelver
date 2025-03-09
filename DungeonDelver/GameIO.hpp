@@ -171,31 +171,6 @@ namespace DungeonDelver::System::IO
 	/// </param>
 	void PauseForMilliseconds(int ms);
 
-	/// <summary>
-	/// Reads the contents of a file into a string to return, each line will have a newline character
-	/// </summary>
-	/// <param name="filepath">
-	/// The path to our file
-	/// </param>
-	/// <returns>
-	/// A string containing the contents of the file
-	/// </returns>
-	std::string ReadFileToString(const std::string& filepath);
-
-	/// <summary>
-	/// Writes a string to a file, can set clearFileFirst to false to simply append to the file
-	/// </summary>
-	/// <param name="filepath">
-	/// The path to our file
-	/// </param>
-	/// <param name="content">
-	/// What to write to the file
-	/// </param>
-	/// <param name="clearFileFirst">
-	/// If we should clear the file before writing to it, defaults to true
-	/// </param>
-	void WriteStringToFile(const std::string& filepath, const std::string& content, bool clearFileFirst = true);
-
 	int GetMenuSelection(std::istream& input, std::ostream& output, const std::vector<std::string>& menuItems,
 		const std::string& header = "", bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
 
