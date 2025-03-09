@@ -327,3 +327,24 @@ static TEST(InputTests, GetIndexOfUserChoice_ReturnsProperIndex)
 
 }
 
+static TEST(InputTests, GetTrimmedLineFromUser_ThrowsExceptionIfStringIsEmpty)
+{
+	std::istringstream mockIn("\n");
+	EXPECT_THROW(io::GetTrimmedLineFromUser(mockIn), std::invalid_argument);
+}
+
+static TEST(InputTests, GetTrimmedLineFromUser_ReturnsExpectedValue)
+{
+	std::istringstream mockIn(" Testing\n");
+	std::string expected("Testing");
+	EXPECT_EQ(expected, io::GetTrimmedLineFromUser(mockIn));
+
+	mockIn.str("Testing \n");
+	EXPECT_EQ(expected, io::GetTrimmedLineFromUser(mockIn));
+
+	mockIn.str(" Testing \n");
+	EXPECT_EQ(expected, io::GetTrimmedLineFromUser(mockIn));
+}
+
+
+
