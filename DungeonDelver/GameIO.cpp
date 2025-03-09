@@ -333,7 +333,7 @@ namespace DungeonDelver::System::IO
 		file.close();
 	}
 
-	void WriteStringToFile(const std::string& filepath, const std::string& content, bool clearFileFirst = true)
+	void WriteStringToFile(const std::string& filepath, const std::string& content, bool clearFileFirst)
 	{
 		std::ofstream file;
 
