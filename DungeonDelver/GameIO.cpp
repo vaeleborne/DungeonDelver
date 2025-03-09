@@ -1,4 +1,4 @@
-#include "GameIO.h"
+#include "GameIO.hpp"
 #include <stdio.h>
 //Includes dependent on build system
 #ifdef _WIN32

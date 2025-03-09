@@ -1,5 +1,14 @@
 #ifndef GAME_MATH_H
 #define GAME_MATH_H
+
+/*******************************************************************
+* AUTHOR: Dylan Morgan
+*
+* DESCRIPTION: This file contains function declarations for
+* Math helper functions to be used in the DungeonDelver
+* Game, though these could be useful for any terminal based game!
+*******************************************************************/
+
 #include <stdexcept>
 #include <random>
 #include <math.h>

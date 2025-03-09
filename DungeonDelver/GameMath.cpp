@@ -1,4 +1,4 @@
-#include "GameMath.h"
+#include "GameMath.hpp"
 
 namespace DungeonDelver::System::Math
 {

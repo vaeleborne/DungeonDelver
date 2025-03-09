@@ -135,9 +135,9 @@
     <ClCompile Include="GameMath.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ANSI_Colors.h" />
-    <ClInclude Include="GameIO.h" />
-    <ClInclude Include="GameMath.h" />
+    <ClInclude Include="ANSI_Colors.hpp" />
+    <ClInclude Include="GameIO.hpp" />
+    <ClInclude Include="GameMath.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

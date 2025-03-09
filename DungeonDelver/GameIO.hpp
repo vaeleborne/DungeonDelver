@@ -1,14 +1,23 @@
 #ifndef GAME_IO_H
 #define GAME_IO_H
 
+/*******************************************************************
+* AUTHOR: Dylan Morgan
+*
+* DESCRIPTION: This file contains function declarations for 
+* Input and Output helper functions to be used in the DungeonDelver
+* Game, though these could be useful for any terminal based game!
+*******************************************************************/
+
+
 #include <iostream>
 #include <string>
 #include <vector>
 #include <thread>
 #include <chrono>
 #include <fstream>
-#include "ANSI_Colors.h"
-#include "GameMath.h"
+#include "ANSI_Colors.hpp"
+#include "GameMath.hpp"
 
 namespace DungeonDelver::System::IO
 {	

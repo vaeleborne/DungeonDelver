@@ -1,7 +1,7 @@
 /*******************************************************************
 * AUTHOR: Dylan Morgan
 * 
-* DESCRIPTION: This file contains comprhensive unit testing for
+* DESCRIPTION: This file contains comprehensive unit testing for
 * the DungeonDelver library's GameIO functions within the 
 * DungeonDelver::System::IO namespace. 
 *******************************************************************/
@@ -9,7 +9,7 @@
 #include "pch.h"
 #include <sstream>
 #include <chrono>
-#include "../DungeonDelver/GameIO.h"
+#include "../DungeonDelver/GameIO.hpp"
 
 
 namespace io = DungeonDelver::System::IO;

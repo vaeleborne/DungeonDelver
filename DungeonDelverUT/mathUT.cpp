@@ -8,7 +8,7 @@
 
 #include "pch.h"
 #include <sstream>
-#include "../DungeonDelver/GameMath.h"
+#include "../DungeonDelver/GameMath.hpp"
 
 namespace mth = DungeonDelver::System::Math;
 
