@@ -46,6 +46,10 @@ namespace DungeonDelver::System::IO
 		/// True if we could read successfully
 		/// </returns>
 		bool ReadStringFromFile(const std::string& fileName, std::string& destinationStr) override;
+
+		virtual bool WriteJSONToFile(const std::string& fileName, const std::string& content) override;
+
+		virtual bool ReadStringFromJSONFile(const std::string& fileName, std::string& destinationStr) override;
 	};
 }
 

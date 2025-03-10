@@ -141,6 +141,9 @@
     <ClInclude Include="GameIO.hpp" />
     <ClInclude Include="GameMath.hpp" />
     <ClInclude Include="IFileIO.hpp" />
+    <ClInclude Include="ISerializable.hpp" />
+    <ClInclude Include="json.hpp" />
+    <ClInclude Include="JSONSerializer.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
