@@ -134,6 +134,7 @@
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="GameIO.cpp" />
     <ClCompile Include="GameMath.cpp" />
+    <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ANSI_Colors.hpp" />
@@ -141,7 +142,11 @@
     <ClInclude Include="GameIO.hpp" />
     <ClInclude Include="GameMath.hpp" />
     <ClInclude Include="IFileIO.hpp" />
+    <ClInclude Include="InventoryComponent.hpp" />
+    <ClInclude Include="InventoryContainer.hpp" />
     <ClInclude Include="ISerializable.hpp" />
+    <ClInclude Include="Item.hpp" />
+    <ClInclude Include="ItemDecorator.hpp" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="JSONSerializer.hpp" />
   </ItemGroup>
