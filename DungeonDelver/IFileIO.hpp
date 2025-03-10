@@ -19,10 +19,6 @@ namespace DungeonDelver::System::IO
 		virtual bool WriteStringToFile(const std::string& fileName, const std::string& content, bool clearFileFirst) = 0;
 
 		virtual bool ReadStringFromFile(const std::string& fileName, std::string& destinationStr) = 0;
-
-		virtual bool WriteJSONToFile(const std::string& fileName, const std::string& content) = 0;
-
-		virtual bool ReadStringFromJSONFile(const std::string& fileName, std::string& destinationStr) = 0;
 	};
 }
 

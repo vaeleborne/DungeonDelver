@@ -67,7 +67,7 @@ namespace DungeonDelver::System::IO
 	/// </summary>
 	/// <param name="message">The message to show the user</param>
 	/// <param name="clearConsole">Bool to optionally clear the console</param>
-	void PressAnyKeyAlert(std::istream& input, std::ostream& output, const std::string& message = "", bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
+	void PressAnyKeyAlert(std::istream& input, std::ostream& output, const std::string& message, bool clearConsole = false, bool inColor = false, const std::string& color = ANSI_WHITE);
 
 	/// <summary>
 	/// Displays Press Any Key To Continue...

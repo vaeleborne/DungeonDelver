@@ -44,5 +44,4 @@ namespace DungeonDelver::System::IO
 		destinationStr = contents.str();
         return true;
     }
-
 }
