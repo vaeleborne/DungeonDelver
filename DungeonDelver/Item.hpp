@@ -7,11 +7,12 @@
 * this component represents an item
 *******************************************************************/
 #include "InventoryComponent.hpp"
+#include "ISerializable.hpp"
 #include <string>
 
 namespace DungeonDelver::GamePlay::Inventory
 {
-	class Item : public InventoryComponent
+	class Item : public InventoryComponent, public DungeonDelver::System::IO::ISerializable
 	{
 	protected: 
 		std::string _name;
@@ -26,6 +27,10 @@ namespace DungeonDelver::GamePlay::Inventory
 		int GetWeight() const override;
 
 		int GetCost() const override;
+
+		std::string ToJSON() const override;
+
+		void FromJSON(const std::string& jsonString) override;
 	};
 }
 

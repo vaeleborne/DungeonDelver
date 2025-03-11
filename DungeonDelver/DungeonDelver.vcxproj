@@ -134,6 +134,7 @@
     <ClCompile Include="FileIO.cpp" />
     <ClCompile Include="GameIO.cpp" />
     <ClCompile Include="GameMath.cpp" />
+    <ClCompile Include="InventoryContainer.cpp" />
     <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>

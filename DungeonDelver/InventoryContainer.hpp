@@ -9,10 +9,11 @@
 *******************************************************************/
 
 #include "InventoryComponent.hpp"
+#include "ISerializable.hpp"
 
 namespace DungeonDelver::GamePlay::Inventory
 {
-	class InventoryContainer : public InventoryComponent
+	class InventoryContainer : public InventoryComponent, public DungeonDelver::System::IO::ISerializable
 	{
 	private:
 		std::string _name;
@@ -30,6 +31,10 @@ namespace DungeonDelver::GamePlay::Inventory
 		int GetWeight() const override;
 
 		int GetCost() const override;
+
+		std::string ToJSON() const override;
+
+		void FromJSON(const std::string& jsonString) override;
 	};
 }
 

@@ -22,5 +22,16 @@ namespace DungeonDelver::GamePlay::Inventory
 	{
 		return _cost;
 	}
+
+
+	std::string Item::ToJSON() const
+	{
+		throw "Not Implemented";
+	}
+
+	void Item::FromJSON(const std::string& jsonString)
+	{
+		throw "Not Implemented";
+	}
 }
 
