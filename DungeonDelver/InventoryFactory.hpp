@@ -16,7 +16,7 @@ namespace DungeonDelver::GamePlay::Inventory
 	class InventoryFactory
 	{
 	public:
-		static std::shared_ptr<DungeonDelver::System::IO::ISerializable> CreateInventoryComponent(const nlohmann::json& json);
+		static std::shared_ptr<InventoryComponent> CreateInventoryComponent(const nlohmann::json& json);
 	};
 
 }

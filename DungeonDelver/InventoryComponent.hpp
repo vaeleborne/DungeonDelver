@@ -20,9 +20,9 @@ namespace DungeonDelver::GamePlay::Inventory
 	public:
 		virtual ~InventoryComponent() = default;
 
-		virtual void Add(std::shared_ptr<DungeonDelver::System::IO::ISerializable>) {}
+		virtual void Add(std::shared_ptr<InventoryComponent>) {}
 
-		virtual void Remove(std::shared_ptr<DungeonDelver::System::IO::ISerializable>) {}
+		virtual void Remove(std::shared_ptr<InventoryComponent>) {}
 
 		virtual void Display(std::ostream& output, int indent = 0, bool inColor = false, const std::string& color = ANSI_WHITE) const = 0;
 

@@ -4,12 +4,12 @@ namespace DungeonDelver::GamePlay::Inventory
 {
 	InventoryContainer::InventoryContainer(const std::string& name) : _name(name) {}
 
-	void InventoryContainer::Add(std::shared_ptr<DungeonDelver::System::IO::ISerializable> item)
+	void InventoryContainer::Add(std::shared_ptr<InventoryComponent> item)
 	{
 		_items.push_back(item);
 	}
 
-	void InventoryContainer::Remove(std::shared_ptr<DungeonDelver::System::IO::ISerializable> item)
+	void InventoryContainer::Remove(std::shared_ptr<InventoryComponent> item)
 	{
 		auto it = std::find(_items.begin(), _items.end(), item);
 		if (it != _items.end())
@@ -28,11 +28,7 @@ namespace DungeonDelver::GamePlay::Inventory
 		float totalWeight = 0;
 		for (auto item : _items)
 		{
-			auto componentItem = std::dynamic_pointer_cast<InventoryComponent>(item);
-			if (componentItem)
-			{
-				totalWeight += componentItem->GetWeight();
-			}
+			totalWeight += item->GetWeight();
 		}
 
 		return totalWeight;
@@ -44,11 +40,7 @@ namespace DungeonDelver::GamePlay::Inventory
 
 		for (auto item : _items)
 		{
-			auto componentItem = std::dynamic_pointer_cast<InventoryComponent>(item);
-			if (componentItem)
-			{
-				totalCost += componentItem->GetCost();
-			}
+			totalCost += item->GetCost();
 		}
 		
 		return totalCost;
@@ -70,7 +62,13 @@ namespace DungeonDelver::GamePlay::Inventory
 			}
 			else
 			{
-				ptr->Serialize(tempJson);
+				auto serializable = std::dynamic_pointer_cast<DungeonDelver::System::IO::ISerializable>(ptr);
+				if (!serializable)
+				{
+					throw std::runtime_error("Could Not Serialize Item, it is not a Serializable!");
+				}
+
+				serializable->Serialize(tempJson);
 				json["items"].push_back(tempJson);
 			}
 		}

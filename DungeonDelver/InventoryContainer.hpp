@@ -20,16 +20,16 @@ namespace DungeonDelver::GamePlay::Inventory
 	{
 	private:
 		std::string _name;
-		std::vector<std::shared_ptr<DungeonDelver::System::IO::ISerializable>> _items;
+		std::vector<std::shared_ptr<InventoryComponent>> _items;
 
 	public:
 		InventoryContainer(const std::string& name);
 
 		InventoryContainer(){}
 
-		void Add(std::shared_ptr<DungeonDelver::System::IO::ISerializable> item) override;
+		void Add(std::shared_ptr<InventoryComponent> item) override;
 
-		void Remove(std::shared_ptr<DungeonDelver::System::IO::ISerializable> item) override;
+		void Remove(std::shared_ptr<InventoryComponent> item) override;
 
 		void Display(std::ostream& output, int indent = 0, bool inColor = false, const std::string& color = ANSI_WHITE) const override;
 

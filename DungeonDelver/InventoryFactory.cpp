@@ -1,7 +1,7 @@
 #include "InventoryFactory.hpp"
 namespace DungeonDelver::GamePlay::Inventory
 {
-	std::shared_ptr<DungeonDelver::System::IO::ISerializable> InventoryFactory::CreateInventoryComponent(const nlohmann::json& json)
+	std::shared_ptr<InventoryComponent> InventoryFactory::CreateInventoryComponent(const nlohmann::json& json)
 	{
 		std::string type = json.at("type").get<std::string>();
 
