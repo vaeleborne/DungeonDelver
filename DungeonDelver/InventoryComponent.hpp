@@ -12,9 +12,10 @@
 #include <memory>
 #include "ANSI_Colors.hpp"
 #include "GameIO.hpp"
+#include "ISerializable.hpp"
 namespace DungeonDelver::GamePlay::Inventory
 {
-	class InventoryComponent
+	class InventoryComponent 
 	{
 	public:
 		virtual ~InventoryComponent() = default;

@@ -25,12 +25,28 @@ namespace DungeonDelver::GamePlay::Inventory
 
 	void Item::Serialize(nlohmann::json& json) const
 	{
-		throw "Not Implemented";
+		json =
+		{
+			{"type", "item"},
+			{"name", _name},
+			{"weight", _weight},
+			{"cost", _cost}
+		};
 	}
 
 	void Item::Deserialize(const nlohmann::json& json)
 	{
-		throw "Not Implemented"; 
+		try
+		{
+			_name = json.at("name").get< std::string > ();
+			_weight = json.at("weight").get<float>();
+			_cost = json.at("cost").get<int>();
+		}
+		catch (nlohmann::json::exception e)
+		{
+			std::cerr << "Error Deserializing Item: " << e.what() << std::endl;
+			throw e;
+		}
 	}
 }
 

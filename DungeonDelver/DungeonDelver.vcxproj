@@ -136,6 +136,7 @@
     <ClCompile Include="GameIO.cpp" />
     <ClCompile Include="GameMath.cpp" />
     <ClCompile Include="InventoryContainer.cpp" />
+    <ClCompile Include="InventoryFactory.cpp" />
     <ClCompile Include="Item.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -147,6 +148,7 @@
     <ClInclude Include="IFileIO.hpp" />
     <ClInclude Include="InventoryComponent.hpp" />
     <ClInclude Include="InventoryContainer.hpp" />
+    <ClInclude Include="InventoryFactory.hpp" />
     <ClInclude Include="ISerializable.hpp" />
     <ClInclude Include="ISerializer.hpp" />
     <ClInclude Include="Item.hpp" />

@@ -9,18 +9,23 @@
 *******************************************************************/
 
 #include "InventoryComponent.hpp"
+#include "Item.hpp"
 #include "ISerializable.hpp"
+#include "InventoryFactory.hpp"
 
 namespace DungeonDelver::GamePlay::Inventory
 {
+
 	class InventoryContainer : public InventoryComponent, public DungeonDelver::System::IO::ISerializable
 	{
 	private:
 		std::string _name;
-		std::vector<std::shared_ptr<InventoryComponent>> _items;
+		std::vector<std::shared_ptr<DungeonDelver::System::IO::ISerializable>> _items;
 
 	public:
 		InventoryContainer(const std::string& name);
+
+		InventoryContainer(){}
 
 		void Add(std::shared_ptr<InventoryComponent> item) override;
 
@@ -35,7 +40,6 @@ namespace DungeonDelver::GamePlay::Inventory
 		void Serialize(nlohmann::json& json) const override;
 
 		void Deserialize(const nlohmann::json& json) override;
-
 	};
 }
 

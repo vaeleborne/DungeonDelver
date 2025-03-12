@@ -22,6 +22,8 @@ namespace DungeonDelver::GamePlay::Inventory
 	public:
 		Item(const std::string& name, float weight, int cost);
 
+		Item() {}
+
 		void Display(std::ostream& output, int indent = 0, bool inColor = false, const std::string& color = ANSI_WHITE) const override;
 
 		int GetWeight() const override;
