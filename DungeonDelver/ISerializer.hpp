@@ -1,5 +1,5 @@
-#ifndef ISERIALIZABLE_HPP
-#define ISERIALIZABLE_HPP
+#ifndef ISERIALIZER_HPP
+#define ISERIALIZER_HPP
 /*******************************************************************
 * AUTHOR: Dylan Morgan
 *

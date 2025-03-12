@@ -103,6 +103,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="inventoryUT.cpp" />
     <ClCompile Include="ioUT.cpp" />
     <ClCompile Include="mathUT.cpp" />
     <ClCompile Include="pch.cpp">
@@ -111,6 +112,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="serializationUT.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DungeonDelver\DungeonDelver.vcxproj">

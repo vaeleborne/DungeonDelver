@@ -13,7 +13,7 @@
 namespace DungeonDelver::System::IO
 {
 	template<typename T>
-	class JSONSerializer : public ISerializer
+	class JSONSerializer : public DungeonDelver::System::IO::ISerializer
 	{
 	private:
 		T& _object;
