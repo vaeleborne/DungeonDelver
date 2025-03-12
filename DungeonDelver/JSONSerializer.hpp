@@ -13,13 +13,13 @@
 namespace DungeonDelver::System::IO
 {
 	template<typename T>
-	class JSONSerializer : public DungeonDelver::System::IO::ISerializer
+	class JSONSerializer : public ISerializer
 	{
 	private:
 		T& _object;
 
 	public:
-		explicit JSONSerializer(const T& object) : _object(object) {}
+		explicit JSONSerializer(T& object) : _object(object) {}
 
 		std::string ToJSON() const override
 		{
