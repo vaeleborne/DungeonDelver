@@ -7,3 +7,4 @@ bin
 obj
 *.filters
 *.user
+!*.vcxproj.filters
