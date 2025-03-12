@@ -5,6 +5,5 @@ x64
 *.coverage
 bin
 obj
-*.filters
 *.user
 !*.vcxproj.filters
