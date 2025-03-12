@@ -4,14 +4,18 @@ namespace DungeonDelver::GamePlay::Inventory
 {
 	InventoryContainer::InventoryContainer(const std::string& name) : _name(name) {}
 
-	void InventoryContainer::Add(std::shared_ptr<InventoryComponent> item)
+	void InventoryContainer::Add(std::shared_ptr<DungeonDelver::System::IO::ISerializable> item)
 	{
-		throw "Not Implemented";
+		_items.push_back(item);
 	}
 
-	void InventoryContainer::Remove(std::shared_ptr<InventoryComponent> item)
+	void InventoryContainer::Remove(std::shared_ptr<DungeonDelver::System::IO::ISerializable> item)
 	{
-		throw "Not Implemented";
+		auto it = std::find(_items.begin(), _items.end(), item);
+		if (it != _items.end())
+		{
+			_items.erase(it);
+		}
 	}
 
 	void InventoryContainer::Display(std::ostream& output, int indent, bool inColor, const std::string& color) const
@@ -21,12 +25,33 @@ namespace DungeonDelver::GamePlay::Inventory
 
 	int InventoryContainer::GetWeight() const
 	{
-		throw "Not Implemented";
+		float totalWeight = 0;
+		for (auto item : _items)
+		{
+			auto componentItem = std::dynamic_pointer_cast<InventoryComponent>(item);
+			if (componentItem)
+			{
+				totalWeight += componentItem->GetWeight();
+			}
+		}
+
+		return totalWeight;
 	}
 
 	int InventoryContainer::GetCost() const
 	{
-		throw "Not Implemented";
+		int totalCost = 0;
+
+		for (auto item : _items)
+		{
+			auto componentItem = std::dynamic_pointer_cast<InventoryComponent>(item);
+			if (componentItem)
+			{
+				totalCost += componentItem->GetCost();
+			}
+		}
+		
+		return totalCost;
 	}
 
 	void InventoryContainer::Serialize(nlohmann::json& json) const

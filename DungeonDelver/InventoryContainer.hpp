@@ -27,9 +27,9 @@ namespace DungeonDelver::GamePlay::Inventory
 
 		InventoryContainer(){}
 
-		void Add(std::shared_ptr<InventoryComponent> item) override;
+		void Add(std::shared_ptr<DungeonDelver::System::IO::ISerializable> item) override;
 
-		void Remove(std::shared_ptr<InventoryComponent> item) override;
+		void Remove(std::shared_ptr<DungeonDelver::System::IO::ISerializable> item) override;
 
 		void Display(std::ostream& output, int indent = 0, bool inColor = false, const std::string& color = ANSI_WHITE) const override;
 
