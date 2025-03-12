@@ -7,13 +7,13 @@
 * DESCRIPTION: Contains a template implementation of our serializer
 *******************************************************************/
 
-#include "ISerializable.hpp"
+#include "ISerializer.hpp"
 #include "json.hpp"
 
 namespace DungeonDelver::System::IO
 {
 	template<typename T>
-	class JSONSerializer : public ISerializable
+	class JSONSerializer : public ISerializer
 	{
 	private:
 		T& _object;

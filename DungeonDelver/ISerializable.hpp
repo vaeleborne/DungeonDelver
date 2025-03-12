@@ -4,10 +4,12 @@
 * AUTHOR: Dylan Morgan
 *
 * DESCRIPTION: Contains an interface for a serializable class which
-* will be used with a decorator pattern for data saving and loading
+* needs to be able to save its data to json or load its data from
+* json
 *******************************************************************/
 
 #include <string>
+#include "json.hpp"
 
 namespace DungeonDelver::System::IO
 {
@@ -16,9 +18,9 @@ namespace DungeonDelver::System::IO
 	public:
 		virtual ~ISerializable() = default;
 
-		virtual std::string ToJSON() const = 0;
+		virtual void Serialize(nlohmann::json& json) const = 0;
 
-		virtual void FromJSON(const std::string& jsonString) = 0;
+		virtual void Deserialize(const nlohmann::json& json) = 0;
 	};
 }
 

@@ -146,6 +146,7 @@
     <ClInclude Include="InventoryComponent.hpp" />
     <ClInclude Include="InventoryContainer.hpp" />
     <ClInclude Include="ISerializable.hpp" />
+    <ClInclude Include="ISerializer.hpp" />
     <ClInclude Include="Item.hpp" />
     <ClInclude Include="ItemDecorator.hpp" />
     <ClInclude Include="json.hpp" />

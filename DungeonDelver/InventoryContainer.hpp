@@ -32,9 +32,10 @@ namespace DungeonDelver::GamePlay::Inventory
 
 		int GetCost() const override;
 
-		std::string ToJSON() const override;
+		void Serialize(nlohmann::json& json) const override;
 
-		void FromJSON(const std::string& jsonString) override;
+		void Deserialize(const nlohmann::json& json) override;
+
 	};
 }
 

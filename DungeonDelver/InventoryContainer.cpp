@@ -14,7 +14,7 @@ namespace DungeonDelver::GamePlay::Inventory
 		throw "Not Implemented";
 	}
 
-	void InventoryContainer::Display(std::ostream& output, int indent = 0, bool inColor = false, const std::string& color = ANSI_WHITE) const
+	void InventoryContainer::Display(std::ostream& output, int indent, bool inColor, const std::string& color) const
 	{
 		throw "Not Implemented";
 	}
@@ -29,13 +29,5 @@ namespace DungeonDelver::GamePlay::Inventory
 		throw "Not Implemented";
 	}
 
-	std::string InventoryContainer::ToJSON() const
-	{
-		throw "Not Implemented";
-	}
 
-	void InventoryContainer::FromJSON(const std::string& jsonString)
-	{
-		throw "Not Implemented";
-	}
 }
