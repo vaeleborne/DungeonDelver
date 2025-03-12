@@ -16,6 +16,7 @@ namespace DungeonDelver::System::IO
 {
 	class FileIO : public IFileIO
 	{
+	public:
 		/// <summary>
 	/// Writes a string to a file, can set clearFileFirst to false to simply append to the file
 	/// </summary>
