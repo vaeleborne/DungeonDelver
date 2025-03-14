@@ -40,6 +40,9 @@
     <Filter Include="Source Files\Data Saving">
       <UniqueIdentifier>{aca13d88-e0ca-4483-8b96-c9f5cd62c1ab}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Stats">
+      <UniqueIdentifier>{fa3c7d73-a090-4556-b6d7-2cbf99dabc5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FileIO.cpp">
@@ -62,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="EncryptedSerializer.cpp">
       <Filter>Source Files\Data Saving</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -109,6 +115,21 @@
     </ClInclude>
     <ClInclude Include="json.hpp">
       <Filter>Header Files\3rd Party</Filter>
+    </ClInclude>
+    <ClInclude Include="Equipment.hpp">
+      <Filter>Header Files\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreStats.hpp">
+      <Filter>Header Files\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="IScaling.hpp">
+      <Filter>Header Files\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.hpp">
+      <Filter>Header Files\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponScaling.hpp">
+      <Filter>Header Files\Stats</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

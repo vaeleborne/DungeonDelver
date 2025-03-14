@@ -8,21 +8,28 @@
 *******************************************************************/
 #include "InventoryComponent.hpp"
 #include "ISerializable.hpp"
+#include "Equipment.hpp"
 #include <string>
 
-namespace DungeonDelver::GamePlay::Inventory
+namespace DungeonDelver::GamePlay::Items
 {
-	class Item : public InventoryComponent, public DungeonDelver::System::IO::ISerializable
+	class Item : public  DungeonDelver::GamePlay::Inventory::InventoryComponent, public DungeonDelver::System::IO::ISerializable
 	{
 	protected: 
 		std::string _name;
 		float _weight;
 		int _cost;
+		EquipmentType _type;
+		EquipmentSlot _slot;
 
 	public:
 		Item(const std::string& name, float weight, int cost);
 
 		Item() {}
+
+		virtual void Use();
+
+		virtual std::string GetType();
 
 		void Display(std::ostream& output, int indent = 0, bool inColor = false, const std::string& color = ANSI_WHITE) const override;
 

@@ -1,6 +1,6 @@
 #include "Item.hpp"
 
-namespace DungeonDelver::GamePlay::Inventory
+namespace DungeonDelver::GamePlay::Items
 {
 	Item::Item(const std::string& name, float weight, int cost) : _name(name), _weight(weight), _cost(cost)
 	{

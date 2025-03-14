@@ -138,10 +138,13 @@
     <ClCompile Include="InventoryContainer.cpp" />
     <ClCompile Include="InventoryFactory.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ANSI_Colors.hpp" />
+    <ClInclude Include="CoreStats.hpp" />
     <ClInclude Include="EncryptedSerializer.hpp" />
+    <ClInclude Include="Equipment.hpp" />
     <ClInclude Include="FileIO.hpp" />
     <ClInclude Include="GameIO.hpp" />
     <ClInclude Include="GameMath.hpp" />
@@ -149,12 +152,15 @@
     <ClInclude Include="InventoryComponent.hpp" />
     <ClInclude Include="InventoryContainer.hpp" />
     <ClInclude Include="InventoryFactory.hpp" />
+    <ClInclude Include="IScaling.hpp" />
     <ClInclude Include="ISerializable.hpp" />
     <ClInclude Include="ISerializer.hpp" />
     <ClInclude Include="Item.hpp" />
     <ClInclude Include="ItemDecorator.hpp" />
     <ClInclude Include="json.hpp" />
     <ClInclude Include="JSONSerializer.hpp" />
+    <ClInclude Include="Weapon.hpp" />
+    <ClInclude Include="WeaponScaling.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

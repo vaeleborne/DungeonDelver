@@ -11,9 +11,9 @@
 
 #include "InventoryComponent.hpp"
 
-namespace DungeonDelver::GamePlay::Inventory
+namespace DungeonDelver::GamePlay::Items
 {
-	class ItemDecorator : public InventoryComponent
+	class ItemDecorator : public DungeonDelver::GamePlay::Inventory::InventoryComponent
 	{
 	protected:
 		std::shared_ptr<InventoryComponent> _component;
